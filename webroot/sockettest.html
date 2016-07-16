@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Socket Test</title>
+
+    <link href="bootstrap.css" rel="stylesheet">
+
+    <style>
+        body {
+            padding:20px;
+        }
+        #console {
+            height: 400px;
+            overflow: auto;
+        }
+        .username-msg {color:orange;}
+        .connect-msg {color:green;}
+        .disconnect-msg {color:red;}
+        .send-msg {color:#888}
+    </style>
+
+
+    <script src="js/socket.io/socket.io.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+
+    <script>
+        var App;
+
+        App = {};
+
+
+        /*
+         Init
+         */
+
+        App.init = function() {
+            App.canvas = document.createElement('canvas');
+            App.canvas.height = 400;
+            App.canvas.width = 800;
+            document.getElementsByTagName('article')[0].appendChild(App.canvas);
+            App.ctx = App.canvas.getContext("2d");
+            App.ctx.fillStyle = "solid";
+            App.ctx.strokeStyle = "#ECD018";
+            App.ctx.lineWidth = 5;
+            App.ctx.lineCap = "round";
+
+
+            App.socket = io.connect('http://localhost:9092/');
+
+
+            App.socket.on('connect', function () {
+                output('<span class="connect-msg">Client has connected to the server!</span>');
+            });
+            App.socket.on('rectangle', function (data) {
+                var r = JSON.parse(data);
+                App.ctx.fillRect(r.x, r.y, r.width, r.height);
+            });
+            App.socket.on('clear', function(data) {
+                App.ctx.clearRect(0,0,App.canvas.width, App.canvas.height);
+            });
+            App.socket.on('disconnect', function () {
+                output('<span class="disconnect-msg">The client has disconnected!</span>');
+            });
+        }
+        function sendDisconnect() {
+            App.socket.disconnect();
+        }
+        function output(message) {
+            var element = "<div>" + message + "</div>";
+            $('#console').prepend(element);
+        }
+
+        $(function() {
+            return App.init();
+        });
+    </script>
+</head>
+
+<body>
+
+<div id="console" class="well">
+</div>
+
+<article>
+
+</article>
+
+
+
+
+
+</body>
+
+</html>
