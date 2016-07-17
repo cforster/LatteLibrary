@@ -4,108 +4,27 @@
 
     <meta charset="utf-8" />
 
-    <title>Socket Test</title>
-
-    <link href="bootstrap.css" rel="stylesheet">
+    <title>Dalton Framework</title>
 
     <style>
-        body {
-            padding:20px;
+        html, body {
+            width:  100%;
+            height: 100%;
+            margin: 0px;
         }
-        #console {
-            height: 400px;
-            overflow: auto;
-        }
-        .username-msg {color:orange;}
-        .connect-msg {color:green;}
-        .disconnect-msg {color:red;}
-        .send-msg {color:#888}
     </style>
-
 
     <script src="js/socket.io/socket.io.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
 
-    <script>
-        var App;
-
-        App = {};
-
-
-        /*
-         Init
-         */
-
-        App.init = function() {
-            App.canvas = document.createElement('canvas');
-            App.canvas.height = 400;
-            App.canvas.width = 800;
-            document.getElementsByTagName('article')[0].appendChild(App.canvas);
-            App.ctx = App.canvas.getContext("2d");
-            App.ctx.fillStyle = "solid";
-            App.ctx.strokeStyle = "#ECD018";
-            App.ctx.lineWidth = 5;
-            App.ctx.lineCap = "round";
-
-
-            App.socket = io.connect('http://localhost:9092/');
-
-
-            App.socket.on('connect', function () {
-                output('<span class="connect-msg">Client has connected to the server!</span>');
-            });
-            App.socket.on('drawframe', function (data) {
-                j = JSON.parse(data);
-
-                //clear:
-                App.ctx.clearRect(0,0,App.canvas.width, App.canvas.height);
-
-                //draw all objects:
-                for(var i=0; i< j.length; i++) {
-                    if(j[i]['type']=="rectangle") {
-                        App.ctx.fillStyle = j[i].color;
-                        App.ctx.fillRect(j[i].x, j[i].y, j[i].width, j[i].height);
-                    }
-                    if(j[i]['type']=="svg") {
-                        App.ctx.fillStyle = j[i].color;
-                        App.ctx.fill(new Path2D(j[i]['svg']));
-                    }
-                }
-                //console.log(jobj = j);
-               // App.ctx.fillRect(r.x, r.y, r.width, r.height);
-            });
-            App.socket.on('disconnect', function () {
-                output('<span class="disconnect-msg">The client has disconnected!</span>');
-                App.socket.disconnect();
-            });
-        };
-        function sendDisconnect() {
-            App.socket.disconnect();
-        }
-        function output(message) {
-            var element = "<div>" + message + "</div>";
-            $('#console').prepend(element);
-        }
-
-        $(function() {
-            return App.init();
-        });
-    </script>
+    <script src="js/scripts.js"></script>
 </head>
 
 <body>
-
-<div id="console" class="well">
-</div>
-
 <article>
 
 </article>
-
-
-
-
-
 </body>
 
 </html>
