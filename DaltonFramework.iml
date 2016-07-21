@@ -7,9 +7,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="com.corundumstudio.socketio:netty-socketio:1.7.10" level="project" />
     <orderEntry type="library" name="org.nanohttpd:nanohttpd-websocket:2.3.0" level="project" />
     <orderEntry type="library" name="org.apache.xmlgraphics:batik-svg-dom:1.7" level="project" />
-    <orderEntry type="library" name="org.apache.ws.security:wss4j:1.6.19" level="project" />
+    <orderEntry type="library" name="org.json:json:20160212" level="project" />
   </component>
 </module>

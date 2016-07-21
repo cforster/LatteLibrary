@@ -52,11 +52,14 @@ import java.util.concurrent.CountDownLatch;
 import fi.iki.elonen.NanoHTTPD;
 import fi.iki.elonen.NanoHTTPD.Response.IStatus;
 import fi.iki.elonen.NanoWSD;
+import org.json.JSONObject;
 
 public class SocketAndWebServer extends NanoWSD {
     private Sock mysock;
     CountDownLatch socketConnectionSync = new CountDownLatch(1); //TODO: make this reset!!!
-
+    protected Map<String, String> dataset = new HashMap<String, String>();
+    CountDownLatch clickLatch = new CountDownLatch(1);
+    String clickValue;
 
     public void sendSockFrame(String s) {
         try {
@@ -98,6 +101,14 @@ public class SocketAndWebServer extends NanoWSD {
 
         @Override
         protected void onMessage(WebSocketFrame webSocketFrame) {
+            if(webSocketFrame.getTextPayload().equals("keep alive")) return;
+            JSONObject o = new JSONObject(webSocketFrame.getTextPayload());
+            if(o.getString("type").equals("click")) {
+                clickValue=o.getString("name");
+                clickLatch.countDown();
+            } else {
+                dataset.put(o.getString("name"), o.getString("val"));
+            }
         }
 
         @Override
