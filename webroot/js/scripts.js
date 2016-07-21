@@ -1,18 +1,22 @@
 var sock = new WebSocket("ws://localhost:8080");
 
-setInterval(function() {
+var heartbeat = setInterval(function() {
     sock.send("keep alive");
 }, 2000); //heartbeat keeps the socket alive, otherwise it closes.  why?!!!
 
+$( function() {
+    $("body").mousemove(function (e) {
+        $('span.coords').empty().append("(" + e.pageX + ", " + e.pageY + ")");
+    });
+});
 
 sock.onopen = function (event) {
-    noty({
-        text: 'Connected -- app has begun',
+    startednoty = noty({
+        text: 'Connected -- app has begun  <span style=\"color:blue;\" class=\"coords\"></span>',
         animation: {
             open: 'animated bounceInUp',  // Animate.css class names
-            close: 'animated bounceOutUp' // Animate.css class names
+            close: 'animated bounceOutDown' // Animate.css class names
         },
-        killer: true,
         closeWith: ['click'],
         layout: 'bottom',
         type: 'alert'
@@ -31,7 +35,7 @@ sock.onmessage = function (event) {
     }
 };
 sock.onclose = function(event) {
-    noty({
+    endnoty = noty({
         text: 'Disconnected -- app has terminated',
         animation: {
             open: 'animated bounceInUp', // Animate.css class names
@@ -42,6 +46,10 @@ sock.onclose = function(event) {
         layout: 'bottom',
         type: 'alert'
     });
+
+    clearInterval(heartbeat);
+
+    setTimeout(function() { startednoty.close(); console.log("startednoty") }, 1000);
 };
 
 function refreshhandler() {

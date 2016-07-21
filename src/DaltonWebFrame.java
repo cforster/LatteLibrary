@@ -1,5 +1,8 @@
+import com.oracle.javafx.jmx.json.JSONReader;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 
+import org.json.JSONObject;
+import org.json.JSONTokener;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -10,10 +13,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
+import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
@@ -25,27 +27,30 @@ public class DaltonWebFrame extends SocketAndWebServer {
     public static void main(String[] args) {
         DaltonWebFrame frame = new DaltonWebFrame();
         int i =10;
-        frame.addInput("myinput", 50, 300);
-        frame.addButton("mybutton", 50, 350);
-//        while(i<100) {
-//            frame.clear();
-//            frame.drawRectangle(i + 10, 20, 30, 40, 0, "blue");
-////            frame.drawRectangle(i + 20, 20, 30, i * 2, i, "red");
-////            frame.drawRectangle(30, i + 20, 30, 40, 0, "green");
-////            frame.drawCircle(50, 50, i, "violet");
-////            frame.drawEllipse(100, 100, i, i * 2, i, "yellow");
-            frame.drawText("hello <em>world</em>", 200, 200, 20, i, "orange");
-////            frame.drawLine(0, 0, i, i, 2, "grey");
-////            frame.drawImage("resources/images/bunny.jpeg", 300, 300, 100, 400, i);
-////            frame.drawSVGElement("<rect fill=\"blue\" x=\"725.0\" width=\"30.0\" height=\"40.0\" y=\"20.0\"></rect>");
-//            frame.paint(40);
-//            i++;
-//        }
-        frame.drawCircle(50, 50, 100, "violet");
-        frame.paint();
-//
-        System.err.println(frame.nextClick());
-        System.err.println(frame.getValue("myinput"));
+        frame.drawImage("", 10,2,400,300,0);
+        frame.paint(50);
+
+//        frame.addInput("myinput", 50, 300);
+//        frame.addButton("mybutton", 50, 350);
+////        while(i<100) {
+////            frame.clear();
+////            frame.drawRectangle(i + 10, 20, 30, 40, 0, "blue");
+//////            frame.drawRectangle(i + 20, 20, 30, i * 2, i, "red");
+//////            frame.drawRectangle(30, i + 20, 30, 40, 0, "green");
+//////            frame.drawCircle(50, 50, i, "violet");
+//////            frame.drawEllipse(100, 100, i, i * 2, i, "yellow");
+//        frame.drawText("hello <em>world</em>", 200, 200, 20, i, "orange");
+//////            frame.drawLine(0, 0, i, i, 2, "grey");
+//////            frame.drawImage("resources/images/bunny.jpeg", 300, 300, 100, 400, i);
+//////            frame.drawSVGElement("<rect fill=\"blue\" x=\"725.0\" width=\"30.0\" height=\"40.0\" y=\"20.0\"></rect>");
+////            frame.paint(40);
+////            i++;
+////        }
+//        frame.drawCircle(50, 50, 100, "violet");
+//        frame.paint();
+////
+        String s = frame.nextClick();
+//        System.err.println(frame.getValue("myinput"));
 
 
 //        System.out.println("hit Enter to stop.\n");
@@ -99,8 +104,8 @@ public class DaltonWebFrame extends SocketAndWebServer {
             e.printStackTrace();
         }
         return clickValue;
-    }
 
+    }
 
     public void stop() {
         super.stop();
