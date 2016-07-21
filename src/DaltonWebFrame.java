@@ -1,8 +1,5 @@
-import com.oracle.javafx.jmx.json.JSONReader;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -14,11 +11,10 @@ import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by charlie on 7/19/16.
@@ -26,42 +22,25 @@ import java.util.concurrent.CountDownLatch;
 public class DaltonWebFrame extends SocketAndWebServer {
     public static void main(String[] args) {
         DaltonWebFrame frame = new DaltonWebFrame();
+        frame.println("hello what's <b>your</b> name");
+        String s = frame.nextLine();
+
+        frame.clearConsole();
+
+        frame.addButton("stop", 10,10);
+
         int i =10;
-        frame.drawImage("", 10,2,400,300,0);
-        frame.paint(50);
 
-//        frame.addInput("myinput", 50, 300);
-//        frame.addButton("mybutton", 50, 350);
-////        while(i<100) {
-////            frame.clear();
-////            frame.drawRectangle(i + 10, 20, 30, 40, 0, "blue");
-//////            frame.drawRectangle(i + 20, 20, 30, i * 2, i, "red");
-//////            frame.drawRectangle(30, i + 20, 30, 40, 0, "green");
-//////            frame.drawCircle(50, 50, i, "violet");
-//////            frame.drawEllipse(100, 100, i, i * 2, i, "yellow");
-//        frame.drawText("hello <em>world</em>", 200, 200, 20, i, "orange");
-//////            frame.drawLine(0, 0, i, i, 2, "grey");
-//////            frame.drawImage("resources/images/bunny.jpeg", 300, 300, 100, 400, i);
-//////            frame.drawSVGElement("<rect fill=\"blue\" x=\"725.0\" width=\"30.0\" height=\"40.0\" y=\"20.0\"></rect>");
-////            frame.paint(40);
-////            i++;
-////        }
-//        frame.drawCircle(50, 50, 100, "violet");
-//        frame.paint();
-////
-        String s = frame.nextClick();
-//        System.err.println(frame.getValue("myinput"));
-
-
-//        System.out.println("hit Enter to stop.\n");
-//        try {
-//            System.in.read();
-//        } catch (IOException ignored) {
-//        }
-//        frame.stop();
-//        frame.stop();
-
-
+        while(true) {
+            frame.clearPaint();
+            Element r = frame.drawRectangle(100, 200, 300, 50, i, "blue");
+            Element t = frame.drawText("hello " + s, 100, 240, 50, 0, "orange");
+            t.setAttribute("transform", r.getAttribute("transform"));
+            frame.paint(0);
+            i+=5;
+            if(frame.nextClick(25)!=null) break;
+        }
+        frame.stop();
 
         //color:
         // String colorFormat(Color c) {
@@ -93,7 +72,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
             e.printStackTrace();
         }
 
-        clear();
+        clearPaint();
     }
 
     public String nextClick() {
@@ -104,12 +83,37 @@ public class DaltonWebFrame extends SocketAndWebServer {
             e.printStackTrace();
         }
         return clickValue;
+    }
 
+    public String nextClick(long timeout) {
+        clickLatch = new CountDownLatch(1);
+        clickValue = null;
+        try {
+            clickLatch.await(timeout, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return clickValue;
+    }
+
+    public String nextLine() {
+        inputLatch = new CountDownLatch(1);
+        try {
+            sendSockFrame("console-in");
+            inputLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return getValue("in");
     }
 
     public void stop() {
         super.stop();
         System.out.println("Server stopped.\n");
+    }
+
+    public void println(String s) {
+        sendSockFrame("console-out" + s);
     }
 
     public void paint() {
@@ -141,9 +145,13 @@ public class DaltonWebFrame extends SocketAndWebServer {
         }
     }
 
-    public void clear() {
+    public void clearPaint() {
         svgdoc = impl.createDocument(svgNS, "svg", null);
         draws.clear();
+    }
+
+    public void clearConsole() {
+        sendSockFrame("console-clear");
     }
 
     public void clearElements() {

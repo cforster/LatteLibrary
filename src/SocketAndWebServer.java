@@ -59,7 +59,9 @@ public class SocketAndWebServer extends NanoWSD {
     CountDownLatch socketConnectionSync = new CountDownLatch(1); //TODO: make this reset!!!
     protected Map<String, String> dataset = new HashMap<String, String>();
     CountDownLatch clickLatch = new CountDownLatch(1);
+    CountDownLatch inputLatch = new CountDownLatch(1);
     String clickValue;
+
 
     public void sendSockFrame(String s) {
         try {
@@ -106,6 +108,8 @@ public class SocketAndWebServer extends NanoWSD {
             if(o.getString("type").equals("click")) {
                 clickValue=o.getString("name");
                 clickLatch.countDown();
+            } else if (o.getString("type").equals("in-enter")) {
+                inputLatch.countDown();
             } else {
                 dataset.put(o.getString("name"), o.getString("val"));
             }

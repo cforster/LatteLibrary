@@ -26,11 +26,20 @@ sock.onmessage = function (event) {
     if(event.data.substring(0,4)=="<svg") {
         $('svg').replaceWith(event.data);   //this is ugly, maybe use underscore?
     }
+    else if (event.data.substring(0,11) == "console-out") {
+        consoleout(event.data.substring(11));
+    }
+    else if(event.data.substring(0,10) == "console-in") {
+        consolein();
+    }
+    else if(event.data.substring(0,13) == "console-clear") {
+        $('div.console').empty();
+    }
     else if(event.data == "cleardiv") {
-        $('div').empty();
+        $('div.content').empty();
     }
     else {
-        $('div').append(event.data);
+        $('div.content').append(event.data);
         refreshhandler();
     }
 };
@@ -54,9 +63,26 @@ sock.onclose = function(event) {
 
 function refreshhandler() {
     $('input').on('input', function () {
-        sock.send("{\"type\":input, \"name\":" +$(this).context.name +", \"val\":"+ $(this).val()+"}");
+        sock.send("{\"type\":input, \"name\":" +$(this).context.name +", \"val\":\""+ $(this).val()+"\"}");
     });
     $('button').click(function() {
        sock.send("{\"type\":click, \"name\":" + $(this).context.name +"}");
     });
+    $('input.in').keypress(function(e) {
+        if(e.which == 13) {
+            sock.send("{\"type\":in-enter}");
+            $('input.in').replaceWith($('input.in').val());
+        }
+    });
+}
+
+function consoleout(txt) {
+    $('div.console').append("<div class=\"console-element\"><span class=\"console-symbol\">&gt;&nbsp;</span>" + txt + "</div>");
+}
+function consolein(txt) {
+    $('div.console').append("<div class=\"console-element\">" +
+        "<span class=\"console-symbol\">&lt;&nbsp;</span>" +
+        "<input name=\"in\" class=\"in\" on></div>");
+    refreshhandler();
+    $('input.in').focus();
 }
