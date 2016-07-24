@@ -99,7 +99,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
     public String nextLine() {
         inputLatch = new CountDownLatch(1);
         try {
-            sendSockFrame("console-in");
+            sendSockFrame("coin");
             inputLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -113,7 +113,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
     }
 
     public void println(String s) {
-        sendSockFrame("console-out" + s);
+        sendSockFrame("cout" + s);
     }
 
     public void paint() {
@@ -132,7 +132,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
             transformer.transform(new DOMSource(svgdoc), new StreamResult(writer));
             String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
 
-            sendSockFrame(output);
+            sendSockFrame("svgt" + output);
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {
@@ -151,11 +151,11 @@ public class DaltonWebFrame extends SocketAndWebServer {
     }
 
     public void clearConsole() {
-        sendSockFrame("console-clear");
+        sendSockFrame("cocl");
     }
 
     public void clearElements() {
-        sendSockFrame("cleardiv");
+        sendSockFrame("cldi");
     }
 
     public String getValue(String name) {
@@ -172,7 +172,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
             htmldoc.appendChild(input);
             StringWriter writer = new StringWriter();
             transformer.transform(new DOMSource(htmldoc), new StreamResult(writer));
-            sendSockFrame( writer.getBuffer().toString().replaceAll("\n|\r", "") );
+            sendSockFrame("html" + writer.getBuffer().toString().replaceAll("\n|\r", "") );
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {
@@ -182,7 +182,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
 
     //include any input and it will be available through getValue([name attribute])
     public void addHTML(String html) {
-        sendSockFrame( html );
+        sendSockFrame( "html" + html );
     }
 
     public void addButton(String name, int x, int y) {
@@ -190,13 +190,14 @@ public class DaltonWebFrame extends SocketAndWebServer {
             Document htmldoc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             Element button = htmldoc.createElement("button");
             button.setAttribute("type", "button");
+            button.setAttribute("class", "clickable");
             button.setAttribute("name", name);
             button.setAttribute("style", "position:fixed; left:" + x + "px; top:" + y + "px;");
             button.setTextContent(name);
             htmldoc.appendChild(button);
             StringWriter writer = new StringWriter();
             transformer.transform(new DOMSource(htmldoc), new StreamResult(writer));
-            sendSockFrame( writer.getBuffer().toString().replaceAll("\n|\r", "") );
+            sendSockFrame( "html" + writer.getBuffer().toString().replaceAll("\n|\r", "") );
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {

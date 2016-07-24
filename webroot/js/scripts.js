@@ -23,24 +23,30 @@ sock.onopen = function (event) {
     });
 };
 sock.onmessage = function (event) {
-    if(event.data.substring(0,4)=="<svg") {
-        $('svg').replaceWith(event.data);   //this is ugly, maybe use underscore?
+    messagetype = event.data.substring(0,4)
+    content = event.data.substring(4);
+
+    if(messagetype =="svgt") {
+        $('svg').replaceWith(content);   //this is ugly, maybe use underscore?
     }
-    else if (event.data.substring(0,11) == "console-out") {
-        consoleout(event.data.substring(11));
+    else if (messagetype == "cout") {
+        consoleout(content);
     }
-    else if(event.data.substring(0,10) == "console-in") {
+    else if(messagetype == "coin") {
         consolein();
     }
-    else if(event.data.substring(0,13) == "console-clear") {
+    else if(messagetype == "cocl") {  //console clear
         $('div.console').empty();
     }
-    else if(event.data == "cleardiv") {
+    else if(messagetype == "cldi") {  //clear div
         $('div.content').empty();
     }
-    else {
-        $('div.content').append(event.data);
+    else if(messagetype == "html") {
+        $('div.content').append(content);
         refreshhandler();
+    }
+    else {
+        console.log("message not handled: " + event.data);
     }
 };
 sock.onclose = function(event) {
@@ -65,7 +71,7 @@ function refreshhandler() {
     $('input').on('input', function () {
         sock.send("{\"type\":input, \"name\":" +$(this).context.name +", \"val\":\""+ $(this).val()+"\"}");
     });
-    $('button').click(function() {
+    $('.clickable').click(function() {
        sock.send("{\"type\":click, \"name\":" + $(this).context.name +"}");
     });
     $('input.in').keypress(function(e) {
