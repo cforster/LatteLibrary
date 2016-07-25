@@ -273,6 +273,11 @@ public class DaltonWebFrame extends SocketAndWebServer {
         return text;
     }
 
+    public Element drawNoun(String name, double x, double y, double w, double h, double rot) {
+        return drawImage("resources/nouns/" + name + ".png", x,y,w,h,rot);
+        //TODO: catch if this noun doesn't exist
+    }
+
     public Element drawImage(String file, double x, double y, double w, double h, double rot) {
         Element image = svgdoc.createElementNS(svgNS, "image");
         image.setAttributeNS(null, "x", Double.toString(x));
