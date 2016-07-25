@@ -58,9 +58,12 @@ public class SocketAndWebServer extends NanoWSD {
     private Sock mysock;
     CountDownLatch socketConnectionSync = new CountDownLatch(1); //TODO: make this reset!!!
     protected Map<String, String> dataset = new HashMap<String, String>();
-    CountDownLatch clickLatch = new CountDownLatch(1);
-    CountDownLatch inputLatch = new CountDownLatch(1);
+    CountDownLatch clickLatch;
+    CountDownLatch inputLatch;
+    CountDownLatch loginLatch;
     String clickValue;
+    String username;
+
 
 
     public void sendSockFrame(String s) {
@@ -92,13 +95,13 @@ public class SocketAndWebServer extends NanoWSD {
         @Override
         protected void onOpen() {
             socketConnectionSync.countDown();
-            System.err.println("socket open!");
+            System.err.println("socket open");
         }
 
         @Override
         protected void onClose(WebSocketFrame.CloseCode closeCode, String s, boolean b) {
-            System.err.println("the sock closed");
-            System.err.println(closeCode + " | " + s + " | " + b);
+            System.err.println("socket closed");
+            //System.err.println(closeCode + " | " + s + " | " + b);
         }
 
         @Override
@@ -110,6 +113,8 @@ public class SocketAndWebServer extends NanoWSD {
                 clickLatch.countDown();
             } else if (o.getString("type").equals("in-enter")) {
                 inputLatch.countDown();
+            } else if (o.getString("type").equals("login-success")) {
+                loginLatch.countDown();
             } else {
                 dataset.put(o.getString("name"), o.getString("val"));
             }

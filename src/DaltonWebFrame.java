@@ -24,6 +24,8 @@ public class DaltonWebFrame extends SocketAndWebServer {
         DaltonWebFrame frame = new DaltonWebFrame();
         frame.println("hello what's <b>your</b> name");
         String s = frame.nextLine();
+        String uname = frame.login();
+        System.err.println(uname);
 
         frame.clearConsole();
 
@@ -33,19 +35,14 @@ public class DaltonWebFrame extends SocketAndWebServer {
 
         while(true) {
             frame.clearPaint();
-            Element r = frame.drawRectangle(100, 200, 300, 50, i, "blue");
-            Element t = frame.drawText("hello " + s, 100, 240, 50, 0, "orange");
+            Element r = frame.drawRectangle(100, 200, 300, 50, i, Color.AliceBlue);
+            Element t = frame.drawText("hello " + s, 100, 240, 50, 0, Color.GoldenRod);
             t.setAttribute("transform", r.getAttribute("transform"));
             frame.paint(0);
             i+=5;
             if(frame.nextClick(25)!=null) break;
         }
         frame.stop();
-
-        //color:
-        // String colorFormat(Color c) {
-        //return "\"" + String.format("#%02x%02x%02x", c.getRed(), c.getGreen(), c.getBlue()) + "\"";
-        // }
     }
 
 
@@ -57,7 +54,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
 
 
     public DaltonWebFrame() {
-        super("localhost", 8080, new File("webroot/"), false);
+        super("localhost", 8080, new File("webroot/"), true); //last elem is quiet
         try {
             start();
             System.out.println("\nRunning! Point your browers to http://localhost:8080/");
@@ -73,6 +70,17 @@ public class DaltonWebFrame extends SocketAndWebServer {
         }
 
         clearPaint();
+    }
+
+    public String login() {
+        loginLatch = new CountDownLatch(1);
+        try{
+            sendSockFrame("logi");
+            loginLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return getValue("username");
     }
 
     public String nextClick() {
@@ -205,60 +213,60 @@ public class DaltonWebFrame extends SocketAndWebServer {
         }
     }
 
-    public Element drawRectangle(double x, double y, double w, double h, double rot, String color) {
+    public Element drawRectangle(double x, double y, double w, double h, double rot, Color color) {
         Element rectangle = svgdoc.createElementNS(svgNS, "rect");
         rectangle.setAttributeNS(null, "x", Double.toString(x));
         rectangle.setAttributeNS(null, "y", Double.toString(y));
         rectangle.setAttributeNS(null, "width", Double.toString(w));
         rectangle.setAttributeNS(null, "height", Double.toString(h));
-        rectangle.setAttributeNS(null, "fill", color);
+        rectangle.setAttributeNS(null, "fill", color.toString());
         if(rot!=0) rectangle.setAttributeNS(null, "transform", "rotate(" + rot + " " + (x+w/2) + " " + (y+h/2) + ")");
         draws.add(rectangle);
         return rectangle;
     }
 
-    public Element drawCircle(double cx, double cy, double r, String color) {
+    public Element drawCircle(double cx, double cy, double r, Color color) {
         Element circle = svgdoc.createElementNS(svgNS, "circle");
         circle.setAttributeNS(null, "cx", Double.toString(cx));
         circle.setAttributeNS(null, "cy", Double.toString(cy));
         circle.setAttributeNS(null, "r", Double.toString(r));
-        circle.setAttributeNS(null, "fill", color);
+        circle.setAttributeNS(null, "fill", color.toString());
         draws.add(circle);
         return circle;
     }
 
-    public Element drawEllipse(double cx, double cy, double rx, double ry, double rot, String color) {
+    public Element drawEllipse(double cx, double cy, double rx, double ry, double rot, Color color) {
         Element ellipse = svgdoc.createElementNS(svgNS, "ellipse");
         ellipse.setAttributeNS(null, "cx", Double.toString(cx));
         ellipse.setAttributeNS(null, "cy", Double.toString(cy));
         ellipse.setAttributeNS(null, "rx", Double.toString(rx));
         ellipse.setAttributeNS(null, "ry", Double.toString(ry));
         if(rot!=0) ellipse.setAttributeNS(null, "transform", "rotate(" + rot + " " + cx + " " + cy + ")");
-        ellipse.setAttributeNS(null, "fill", color);
+        ellipse.setAttributeNS(null, "fill", color.toString());
         draws.add(ellipse);
         return ellipse;
     }
 
-    public Element drawLine(double x1, double y1, double x2, double y2, double thick, String color) {
+    public Element drawLine(double x1, double y1, double x2, double y2, double thick, Color color) {
         Element line = svgdoc.createElementNS(svgNS, "line");
         line.setAttributeNS(null, "x1", Double.toString(x1));
         line.setAttributeNS(null, "y1", Double.toString(y1));
         line.setAttributeNS(null, "x2", Double.toString(x2));
         line.setAttributeNS(null, "y2", Double.toString(y2));
-        line.setAttributeNS(null, "stroke", color);
+        line.setAttributeNS(null, "stroke", color.toString());
         line.setAttributeNS(null, "stroke-width", Double.toString(thick));
         draws.add(line);
         return line;
     }
 
 
-    public Element drawText(String s, double x, double y, int size, double rot, String color)
+    public Element drawText(String s, double x, double y, int size, double rot, Color color)
     {
         Element text = svgdoc.createElementNS(svgNS, "text");
         text.setAttributeNS(null, "x", Double.toString(x));
         text.setAttributeNS(null, "y", Double.toString(y));
         text.setAttributeNS(null, "font-size", Integer.toString(size));
-        text.setAttributeNS(null, "style", "fill: " +color +";");
+        text.setAttributeNS(null, "style", "fill: " +color.toString() +";");
         if(rot!=0) text.setAttributeNS(null, "transform", "rotate(" + rot + " " + x + " " + y + ")");
         text.setTextContent(s);
         draws.add(text);
@@ -300,18 +308,8 @@ public class DaltonWebFrame extends SocketAndWebServer {
     public Element drawSVGElement(Element node) {
         node = (Element) svgdoc.importNode(node, true);
         draws.add(node);
+
         return node;
     }
 
-}
-class Color extends java.awt.Color {
-    final public Color aliceblue = (Color) Color.decode("#F0F8FF");
-
-    public Color(int r, int g, int b) {
-        super(r, g, b);
-    }
-
-    public String toString() {
-        return "\"" + String.format("#%02x%02x%02x", this.getRed(), this.getGreen(), this.getBlue()) + "\"";
-    }
 }

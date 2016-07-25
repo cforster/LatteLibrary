@@ -45,6 +45,21 @@ sock.onmessage = function (event) {
         $('div.content').append(content);
         refreshhandler();
     }
+    else if(messagetype == "logi") {
+        $('#loginmodal').modal({
+            escapeClose: false,
+            clickClose: false,
+            showClose: false,
+            fadeDuration: 100
+        });
+        $("#loginbtn").on('click', function (e) {
+            if($('input#username').val()!="") {
+                $.modal.close();
+                sock.send("{\"type\": login-success}");
+            }  //for now, any content will do.
+            //todo: replace with actual auth.
+        })
+    }
     else {
         console.log("message not handled: " + event.data);
     }

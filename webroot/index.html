@@ -34,17 +34,27 @@
             outline:none;
         }
     </style>
-    <link rel="stylesheet" href="animate.min.css">
+    <link rel="stylesheet" href="css/animate.min.css">
 
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
     <script src="js/scripts.js"></script>
 
+    <script src="js/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/jquery.modal.min.css" type="text/css" media="screen" />
 
 </head>
 <body>
 <div class="console"></div>
 <div class="content"></div>
 <svg></svg>
+
+
+<!-- Login Modal-->
+<div class="modal" id="loginmodal" style="display:none;">
+    <h4>Log In Here</h4>
+    <p><input type="text" id="username" name="username" /></p>
+    <button type="button" id="loginbtn">Log In</button>
+</div><!-- /.modal -->
 </body>
 </html>
