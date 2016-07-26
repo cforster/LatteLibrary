@@ -26,7 +26,7 @@ public class Color extends java.awt.Color {
     final static public Color DarkGray = new Color("#a9a9a9");
     final static public Color DarkGrey = new Color("#a9a9a9");
     final static public Color DarkGreen = new Color("#006400");
-    final static public Color DarkKhaki = new Color("##BDB76B");
+    final static public Color DarkKhaki = new Color("#BDB76B");
     final static public Color DarkMagenta = new Color("#8b008b");
     final static public Color DarkOliveGreen = new Color("#556B2F");
     final static public Color DarkOrange = new Color("#FF8C00");

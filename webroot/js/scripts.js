@@ -27,7 +27,7 @@ sock.onmessage = function (event) {
     content = event.data.substring(4);
 
     if(messagetype =="svgt") {
-        $('svg').replaceWith(content);   //this is ugly, maybe use underscore?
+        $('#user-svg').replaceWith(content);   //this is ugly, maybe use underscore?
     }
     else if (messagetype == "cout") {
         consoleout(content);
@@ -79,8 +79,10 @@ sock.onclose = function(event) {
 
     clearInterval(heartbeat);
 
-    setTimeout(function() { startednoty.close(); console.log("startednoty") }, 1000);
+    setTimeout(function() { startednoty.close(); }, 1000);
 };
+
+
 
 function refreshhandler() {
     $('input').on('input', function () {
@@ -107,3 +109,26 @@ function consolein(txt) {
     refreshhandler();
     $('input.in').focus();
 }
+
+//leap controller:
+var controller = new Leap.Controller();
+controller.on("frame", function(frame){
+    if(frame.pointables.length > 0)
+    {
+        //Get a pointable and normalize the tip position
+        var pointable = frame.pointables[0];
+        var interactionBox = frame.interactionBox;
+        var normalizedPosition = interactionBox.normalizePoint(pointable.tipPosition, true);
+
+        // Convert the normalized coordinates to span the canvas
+        target = $('#leap-circle');
+        cx = $(window).width() * normalizedPosition[0];
+        cy = $(window).height() * (1 - normalizedPosition[1]);
+
+        target.attr('cx', cx);
+        target.attr('cy', cy);
+
+        sock.send("{\"type\":leap-position, \"x\": \"" +cx +"\" , \"y\":\""+ cy+"\"}");
+    }
+});
+controller.connect();

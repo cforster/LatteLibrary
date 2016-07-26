@@ -62,7 +62,7 @@ public class SocketAndWebServer extends NanoWSD {
     CountDownLatch inputLatch;
     CountDownLatch loginLatch;
     String clickValue;
-    String username;
+
 
 
 
@@ -115,6 +115,9 @@ public class SocketAndWebServer extends NanoWSD {
                 inputLatch.countDown();
             } else if (o.getString("type").equals("login-success")) {
                 loginLatch.countDown();
+            } else if (o.getString("type").equals("leap-position")) {
+                dataset.put("leap-x", o.getString("x"));
+                dataset.put("leap-y", o.getString("y"));
             } else {
                 dataset.put(o.getString("name"), o.getString("val"));
             }

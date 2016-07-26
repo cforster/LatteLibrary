@@ -24,8 +24,8 @@ public class DaltonWebFrame extends SocketAndWebServer {
         DaltonWebFrame frame = new DaltonWebFrame();
         frame.println("hello what's <b>your</b> name");
         String s = frame.nextLine();
-        String uname = frame.login();
-        System.err.println(uname);
+//        String uname = frame.login();
+//        System.err.println(uname);
 
         frame.clearConsole();
 
@@ -38,6 +38,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
             Element r = frame.drawRectangle(100, 200, 300, 50, i, Color.AliceBlue);
             Element t = frame.drawText("hello " + s, 100, 240, 50, 0, Color.GoldenRod);
             t.setAttribute("transform", r.getAttribute("transform"));
+            frame.drawText(frame.getLeapX() + "," +frame.getLeapY(), 100, 100, 20, 0, Color.IndianRed);
             frame.paint(0);
             i+=5;
             if(frame.nextClick(25)!=null) break;
@@ -81,6 +82,14 @@ public class DaltonWebFrame extends SocketAndWebServer {
             e.printStackTrace();
         }
         return getValue("username");
+    }
+
+    public int getLeapX() {
+        return (int)Double.parseDouble(getValue("leap-x"));
+    }
+
+    public int getLeapY() {
+        return (int) Double.parseDouble(getValue("leap-y"));
     }
 
     public String nextClick() {
@@ -155,6 +164,7 @@ public class DaltonWebFrame extends SocketAndWebServer {
 
     public void clearPaint() {
         svgdoc = impl.createDocument(svgNS, "svg", null);
+        svgdoc.getDocumentElement().setAttribute("id", "user-svg");
         draws.clear();
     }
 
