@@ -1,4 +1,5 @@
-package org.dalton;/*
+package fi.iki.elonen;
+/*
  * #%L
  * NanoHttpd-Webserver
  * %%
@@ -29,6 +30,18 @@ package org.dalton;/*
  * OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  * #L%
+ *
+ *
+ *
+ * CF log:
+ * This used to extend NanoHTTPD, I changed it to extend NanoWSD so I could use both WS and simple file server
+ * that made the respond(...) function break because of a call to NanoHTTPD.Response(...) which is protected
+ *    (I commented most of the contents of that function, which is about supporting CORS, not needed)
+ * also changed serve(...) to serveHTTP(...) to allow check for WSD first.
+ *
+ * the rest of my content is before default index file names.....
+ *
+ *
  */
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -55,13 +68,13 @@ import fi.iki.elonen.NanoWSD;
 import org.json.JSONObject;
 
 public class SocketAndWebServer extends NanoWSD {
-    private Sock mysock;
-    CountDownLatch socketConnectionSync = new CountDownLatch(1); //TODO: make this reset!!!
+    protected Sock mysock;
+    protected CountDownLatch socketConnectionSync = new CountDownLatch(1); //TODO: make this reset!!!
     protected Map<String, String> dataset = new HashMap<String, String>();
-    CountDownLatch clickLatch;
-    CountDownLatch inputLatch;
-    CountDownLatch loginLatch;
-    String clickValue;
+    protected CountDownLatch clickLatch;
+    protected CountDownLatch inputLatch;
+    protected CountDownLatch loginLatch;
+    protected String clickValue;
 
 
 

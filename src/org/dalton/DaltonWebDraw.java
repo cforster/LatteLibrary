@@ -1,5 +1,6 @@
 package org.dalton;
 
+import fi.iki.elonen.SocketAndWebServer;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 
 import org.w3c.dom.DOMImplementation;
@@ -17,6 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import fi.iki.elonen.SocketAndWebServer;
 
 /**
  * Created by charlie on 7/19/16.
