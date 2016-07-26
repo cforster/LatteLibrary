@@ -2,4 +2,8 @@
 
 Very early version with lots of problems.
 
-maven dependency: com.corundumstudio.socketio:netty-socketio:1.7.10
+#### maven dependencies:
+
+* org.apache.xmlgraphics:batik-svg-dom:1.7
+* org.json:json:20160212
+* org.nanohttpd:nanohttpd-websocket:2.3.0
