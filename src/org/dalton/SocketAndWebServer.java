@@ -1,4 +1,4 @@
-/*
+package org.dalton;/*
  * #%L
  * NanoHttpd-Webserver
  * %%

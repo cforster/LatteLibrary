@@ -1,3 +1,5 @@
+package org.dalton;
+
 import org.apache.batik.dom.svg.SVGDOMImplementation;
 
 import org.w3c.dom.DOMImplementation;
