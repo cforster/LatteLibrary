@@ -1,4 +1,4 @@
-# DaltonFramework
+# LatteFramework
 
 Very early version with lots of problems.
 
