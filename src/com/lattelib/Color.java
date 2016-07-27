@@ -1,4 +1,4 @@
-package org.dalton;
+package com.lattelib;
 
 /**
  * Created by charlie on 7/24/16.

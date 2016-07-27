@@ -1,4 +1,4 @@
-package org.dalton;
+package com.lattelib;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;

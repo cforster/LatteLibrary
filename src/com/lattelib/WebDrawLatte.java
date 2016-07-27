@@ -1,4 +1,4 @@
-package org.dalton;
+package com.lattelib;
 
 import fi.iki.elonen.SocketAndWebServer;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
