@@ -1,6 +1,8 @@
-# LatteFramework
+# LatteLibrary
 
 Very early version with lots of problems.
+
+www.lattelib.com
 
 #### maven dependencies:
 
