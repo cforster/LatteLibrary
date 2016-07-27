@@ -11,7 +11,7 @@ import java.net.URL;
 /**
  * Created by charlie on 7/21/16.
  */
-public class DaltonData {
+public class DataLatte {
     public static String giphy(String tag) {
         try {
             String uri = "http://api.giphy.com/v1/gifs/random?tag=" + tag.trim().replaceAll(" ", "+") + "&api_key=dc6zaTOxFJmzC";

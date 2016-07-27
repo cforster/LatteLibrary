@@ -29,7 +29,7 @@ sock.onmessage = function (event) {
     if(messagetype =="svgt") {
         $('#user-svg').replaceWith(content);   //this is ugly, maybe use underscore?
     }
-    else if (messagetype == "cout") {
+    else if(messagetype == "cout") {
         consoleout(content);
     }
     else if(messagetype == "coin") {

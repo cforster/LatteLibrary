@@ -18,14 +18,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import fi.iki.elonen.SocketAndWebServer;
 
 /**
  * Created by charlie on 7/19/16.
  */
-public class DaltonWebDraw extends SocketAndWebServer {
+public class WebDrawLatte extends SocketAndWebServer {
     public static void main(String[] args) {
-        DaltonWebDraw frame = new DaltonWebDraw();
+        WebDrawLatte frame = new WebDrawLatte();
         frame.println("hello what's <b>your</b> name");
         String s = frame.nextLine();
 //        String uname = frame.login();
@@ -61,7 +60,7 @@ public class DaltonWebDraw extends SocketAndWebServer {
     /**
      * default constructor
      */
-    public DaltonWebDraw() {
+    public WebDrawLatte() {
         super("localhost", 8080, new File("webroot/"), true); //last elem is quiet
         try {
             start();
@@ -119,7 +118,7 @@ public class DaltonWebDraw extends SocketAndWebServer {
      * you can make any element clickable by adding the "clickable" id and giving it a name
      * ex:
      * Element r = drawRectangle(...)
-     * r.setAttribute("id", "clickable");
+     * r.setAttribute("class", "clickable");
      * r.setAttribute("name", "myrectangle");
      */
     public String nextClick() {
