@@ -60,6 +60,9 @@ sock.onmessage = function (event) {
             //todo: replace with actual auth.
         })
     }
+    else if(messagetype == "titl") {
+        document.title=content;
+    }
     else {
         console.log("message not handled: " + event.data);
     }

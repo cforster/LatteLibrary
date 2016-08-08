@@ -79,6 +79,13 @@ public class WebDrawLatte extends SocketAndWebServer {
         clearPaint();
     }
 
+    public void addDirectory(String directory) {
+        rootDirs.add(new File(directory));
+    }
+
+    public void setTitle(String title) {
+        sendSockFrame("titl" + title);
+    }
 
     /**
      * open a login modal that requires a login from the user
