@@ -9,10 +9,23 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by charlie on 7/21/16.
+ * Created by charlie on 8/9/16.
  */
-public class DataLatte {
-    public static String giphy(String tag) {
+public class ImageLatte {
+    private String fname;
+
+    ImageLatte(String type, String ref) {
+        if(type.contains("gi")) {
+            fname = giphy(ref);
+        } else if(type.contains("fi")) {
+            fname = ref;
+        } else {
+            fname = "http://media0.giphy.com/media/7beSjLq7J6qfS/giphy.gif";
+        }
+    }
+
+
+    private static String giphy(String tag) {
         try {
             String uri = "http://api.giphy.com/v1/gifs/random?tag=" + tag.trim().replaceAll(" ", "+") + "&api_key=dc6zaTOxFJmzC";
 

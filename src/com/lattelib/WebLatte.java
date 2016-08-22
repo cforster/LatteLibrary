@@ -22,31 +22,26 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by charlie on 7/19/16.
  */
-public class WebDrawLatte extends SocketAndWebServer {
+public class WebLatte extends SocketAndWebServer {
     public static void main(String[] args) {
-        WebDrawLatte frame = new WebDrawLatte();
+        WebLatte frame = new WebLatte();
+
+
         frame.println("hello what's <b>your</b> name");
-        String s = frame.nextLine();
-//        String uname = frame.login();
-//        System.err.println(uname);
+        String s = frame.nextLine().toString();
 
         frame.clearConsole();
 
-        frame.addButton("stop", 10,10);
-
         int i =10;
-
         while(true) {
             frame.clearPaint();
-            Element r = frame.drawRectangle(100, 200, 300, 50, i, Color.AliceBlue);
-            Element t = frame.drawText("hello " + s, 100, 240, 50, 0, Color.GoldenRod);
-            t.setAttribute("transform", r.getAttribute("transform"));
-            frame.drawText(frame.getLeapX() + "," +frame.getLeapY(), 100, 100, 20, 0, Color.IndianRed);
-            frame.paint(0);
-            i+=5;
-            if(frame.nextClick(25)!=null) break;
-        }
-        frame.stop();
+            frame.drawRectangle(100, 200, 300, 50, i, Color.AliceBlue);
+            frame.drawText("hello " + s, 100, 240, 50, i, Color.GoldenRod);
+            frame.drawText("x: " + frame.getLeapX() + ", " + "y: " + frame.getLeapY(), frame.getLeapX(),
+                    frame.getLeapY(), 20, 0, Color.Aqua);
+            frame.paint();
+            i++;
+         }
     }
 
 
@@ -60,8 +55,10 @@ public class WebDrawLatte extends SocketAndWebServer {
     /**
      * default constructor
      */
-    public WebDrawLatte() {
+    public WebLatte() {
         super("localhost", 8080, new File("webroot/"), true); //last elem is quiet
+        dataset.put("leap-x", "-1.0"); //default value
+        dataset.put("leap-y", "-1.0"); //default value
         try {
             start();
             System.out.println("\nRunning! Point your browers to http://localhost:8080/");
@@ -85,6 +82,10 @@ public class WebDrawLatte extends SocketAndWebServer {
 
     public void setTitle(String title) {
         sendSockFrame("titl" + title);
+    }
+
+    public static void makeClickable(Element e) {
+        e.setAttribute("class", "clickable");
     }
 
     /**
@@ -158,7 +159,7 @@ public class WebDrawLatte extends SocketAndWebServer {
      * wait for the user to input a string
      * @return the user inputted string
      */
-    public String nextLine() {
+    public Line nextLine() {
         inputLatch = new CountDownLatch(1);
         try {
             sendSockFrame("coin");
@@ -166,7 +167,17 @@ public class WebDrawLatte extends SocketAndWebServer {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return getValue("in");
+        return new Line(getValue("in"));
+    }
+
+    class Line {
+        private String s;
+        Line(String s) { this.s = s; }
+        public String toString() { return s; }
+        public int toInt() { return Integer.parseInt(s); }
+        public double toDouble() { return Double.parseDouble(s); }
+        public char toChar(int index) { return s.charAt(index); }
+        public char toChar() { return toChar(0); }
     }
 
     /**
