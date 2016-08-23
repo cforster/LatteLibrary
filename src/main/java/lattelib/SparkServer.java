@@ -1,15 +1,13 @@
-package com.lattelib;
+package lattelib;
 
+import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketMessage;
 import org.eclipse.jetty.websocket.api.annotations.WebSocket;
-import org.eclipse.jetty.websocket.api.Session;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CountDownLatch;
 
 import static spark.Spark.*;
@@ -28,7 +26,7 @@ public class SparkServer {
 
         port(8080);
         webSocket("/websocket", SparkWebSocket.class);
-        staticFiles.location(""); // Static files
+        staticFiles.location("/webroot"); // Static files
 
         init();
         awaitInitialization(); // Wait for server to be initialized

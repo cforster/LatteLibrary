@@ -22,7 +22,15 @@ sock.onmessage = function (event) {
     message = JSON.parse(event.data);
 
     if(message.type == "svgt") {
-        $('#user-svg').replaceWith(message.payload);   //this is ugly, maybe use underscore?
+        //$('#user-svg').replaceWith(message.payload);   //this is ugly, maybe use underscore?
+
+        //the svg gets updated using reactjs:
+        var root = React.createElement("div", {
+            className: "content",
+            dangerouslySetInnerHTML: {__html: message.payload}
+        });
+        ReactDOM.render(root, document.getElementById('user-svg'));
+        //consider adding keys if people get massive slowdown
     }
     else if(message.type == "cout") {
         consoleout(message.payload);

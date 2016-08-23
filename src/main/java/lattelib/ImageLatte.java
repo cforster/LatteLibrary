@@ -1,4 +1,4 @@
-package com.lattelib;
+package lattelib;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;

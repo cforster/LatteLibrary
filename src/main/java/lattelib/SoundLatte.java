@@ -1,4 +1,4 @@
-package com.lattelib;
+package lattelib;
 
 /**
  * Created by charlie on 8/9/16.

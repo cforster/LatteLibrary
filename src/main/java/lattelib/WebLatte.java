@@ -1,7 +1,6 @@
-package com.lattelib;
+package lattelib;
 
 import org.apache.batik.dom.svg.SVGDOMImplementation;
-
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -12,7 +11,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,28 +25,6 @@ import java.util.concurrent.TimeUnit;
  * Created by charlie on 7/19/16.
  */
 public class WebLatte  {
-    public static void main(String[] args) {
-        WebLatte frame = new WebLatte();
-
-
-        frame.println("hello what's <b>your</b> name");
-        String s = frame.nextLine().toString();
-
-        frame.clearConsole();
-
-        int i =10;
-        while(true) {
-            frame.clearPaint();
-            frame.drawRectangle(100, 200, 300, 50, i, Color.AliceBlue);
-            frame.drawText("hello " + s, 100, 240, 50, i, Color.GoldenRod);
-            frame.drawText("x: " + frame.getLeapX() + ", " + "y: " + frame.getLeapY(), frame.getLeapX(),
-                    frame.getLeapY(), 20, 0, Color.Aqua);
-            frame.paint();
-            i++;
-         }
-    }
-
-
     private List<Element> draws = new LinkedList<Element>();
     DOMImplementation impl = SVGDOMImplementation.getDOMImplementation();
     String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
