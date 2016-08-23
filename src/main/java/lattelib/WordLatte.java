@@ -1,4 +1,4 @@
-package com.lattelib;
+package lattelib;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,7 +12,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 

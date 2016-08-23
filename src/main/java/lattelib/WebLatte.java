@@ -1,8 +1,6 @@
-package com.lattelib;
+package lattelib;
 
-import fi.iki.elonen.SocketAndWebServer;
 import org.apache.batik.dom.svg.SVGDOMImplementation;
-
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -13,58 +11,62 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by charlie on 7/19/16.
  */
-public class WebLatte extends SocketAndWebServer {
-    public static void main(String[] args) {
-        WebLatte frame = new WebLatte();
-
-
-        frame.println("hello what's <b>your</b> name");
-        String s = frame.nextLine().toString();
-
-        frame.clearConsole();
-
-        int i =10;
-        while(true) {
-            frame.clearPaint();
-            frame.drawRectangle(100, 200, 300, 50, i, Color.AliceBlue);
-            frame.drawText("hello " + s, 100, 240, 50, i, Color.GoldenRod);
-            frame.drawText("x: " + frame.getLeapX() + ", " + "y: " + frame.getLeapY(), frame.getLeapX(),
-                    frame.getLeapY(), 20, 0, Color.Aqua);
-            frame.paint();
-            i++;
-         }
-    }
-
-
+public class WebLatte  {
     private List<Element> draws = new LinkedList<Element>();
     DOMImplementation impl = SVGDOMImplementation.getDOMImplementation();
     String svgNS = SVGDOMImplementation.SVG_NAMESPACE_URI;
     Document svgdoc;
     private Transformer transformer;
+    private SparkServer sparkServer;
+
+
+    protected Map<String, String> dataset = new HashMap<String, String>();
+    protected CountDownLatch clickLatch;
+    protected CountDownLatch inputLatch;
+    protected CountDownLatch loginLatch;
+    protected String clickValue;
+
 
 
     /**
      * default constructor
      */
     public WebLatte() {
-        super("localhost", 8080, new File("webroot/"), true); //last elem is quiet
+//        super("localhost", 8080, new File("webroot/"), true); //last elem is quiet
+        System.out.println("\nRunning! Point chrome to http://localhost:8080/");
+
+        sparkServer = new SparkServer(json -> {
+            if(json.getString("type").equals("click")) {
+                clickValue=json.getString("name");
+                clickLatch.countDown();
+            } else if (json.getString("type").equals("in-enter")) {
+                inputLatch.countDown();
+            } else if (json.getString("type").equals("login-success")) {
+                loginLatch.countDown();
+            } else if (json.getString("type").equals("leap-position")) {
+                dataset.put("leap-x", json.getString("x"));
+                dataset.put("leap-y", json.getString("y"));
+            } else {
+                dataset.put(json.getString("name"), json.getString("val"));
+            }
+        });
+
         dataset.put("leap-x", "-1.0"); //default value
         dataset.put("leap-y", "-1.0"); //default value
-        try {
-            start();
-            System.out.println("\nRunning! Point your browers to http://localhost:8080/");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
         try {
             transformer = TransformerFactory.newInstance().newTransformer();
@@ -77,11 +79,11 @@ public class WebLatte extends SocketAndWebServer {
     }
 
     public void addDirectory(String directory) {
-        rootDirs.add(new File(directory));
+//        rootDirs.add(new File(directory));
     }
 
     public void setTitle(String title) {
-        sendSockFrame("titl" + title);
+        sparkServer.sendMessage("titl", title);
     }
 
     public static void makeClickable(Element e) {
@@ -95,7 +97,7 @@ public class WebLatte extends SocketAndWebServer {
     public String login() {
         loginLatch = new CountDownLatch(1);
         try{
-            sendSockFrame("logi");
+            sparkServer.sendMessage("logi", "");
             loginLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -162,7 +164,7 @@ public class WebLatte extends SocketAndWebServer {
     public Line nextLine() {
         inputLatch = new CountDownLatch(1);
         try {
-            sendSockFrame("coin");
+            sparkServer.sendMessage("coin", "");
             inputLatch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -180,20 +182,13 @@ public class WebLatte extends SocketAndWebServer {
         public char toChar() { return toChar(0); }
     }
 
-    /**
-     * end the program
-     */
-    public void stop() {
-        super.stop();
-        System.out.println("Server stopped.\n");
-    }
 
     /**
      * print a line to the screen.  can include html tags
      * @param s the string to print
      */
     public void println(String s) {
-        sendSockFrame("cout" + s);
+        sparkServer.sendMessage("cout", s);
     }
 
     /**
@@ -219,7 +214,7 @@ public class WebLatte extends SocketAndWebServer {
             transformer.transform(new DOMSource(svgdoc), new StreamResult(writer));
             String output = writer.getBuffer().toString().replaceAll("\n|\r", "");
 
-            sendSockFrame("svgt" + output);
+            sparkServer.sendMessage("svgt", output);
         } catch (TransformerConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {
@@ -245,19 +240,19 @@ public class WebLatte extends SocketAndWebServer {
      * clear any printed text in the window
      */
     public void clearConsole() {
-        sendSockFrame("cocl");
+        sparkServer.sendMessage("cocl", "");
     }
 
     /**
      * clear any input elements in the window
      */
     public void clearElements() {
-        sendSockFrame("cldi");
+        sparkServer.sendMessage("cldi", "");
     }
 
     /**
      * gives the value stored in the input element
-     * @param name the input element's name
+     * @param name the input element'sparkServer name
      * @return the value typed in
      *
      * this will work with any input element
@@ -283,7 +278,7 @@ public class WebLatte extends SocketAndWebServer {
             htmldoc.appendChild(input);
             StringWriter writer = new StringWriter();
             transformer.transform(new DOMSource(htmldoc), new StreamResult(writer));
-            sendSockFrame("html" + writer.getBuffer().toString().replaceAll("\n|\r", "") );
+            sparkServer.sendMessage("html", writer.getBuffer().toString().replaceAll("\n|\r", ""));
             dataset.put(name, "");
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
@@ -298,7 +293,7 @@ public class WebLatte extends SocketAndWebServer {
     * can be cleared with clearElements()
      */
     public void addHTML(String html) {
-        sendSockFrame( "html" + html );
+        sparkServer.sendMessage("html", html);
     }
 
     /**
@@ -319,7 +314,7 @@ public class WebLatte extends SocketAndWebServer {
             htmldoc.appendChild(button);
             StringWriter writer = new StringWriter();
             transformer.transform(new DOMSource(htmldoc), new StreamResult(writer));
-            sendSockFrame( "html" + writer.getBuffer().toString().replaceAll("\n|\r", "") );
+            sparkServer.sendMessage("html", writer.getBuffer().toString().replaceAll("\n|\r", ""));
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (TransformerException e) {

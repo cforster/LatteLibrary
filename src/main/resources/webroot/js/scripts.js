@@ -1,8 +1,4 @@
-var sock = new WebSocket("ws://localhost:8080");
-
-var heartbeat = setInterval(function() {
-    sock.send("keep alive");
-}, 2000); //heartbeat keeps the socket alive, otherwise it closes.  why?!!!
+var sock = new WebSocket("ws://localhost:8080/websocket");
 
 $( function() {
     $("body").mousemove(function (e) {
@@ -23,29 +19,36 @@ sock.onopen = function (event) {
     });
 };
 sock.onmessage = function (event) {
-    messagetype = event.data.substring(0,4)
-    content = event.data.substring(4);
+    message = JSON.parse(event.data);
 
-    if(messagetype =="svgt") {
-        $('#user-svg').replaceWith(content);   //this is ugly, maybe use underscore?
+    if(message.type == "svgt") {
+        //$('#user-svg').replaceWith(message.payload);   //this is ugly, maybe use underscore?
+
+        //the svg gets updated using reactjs:
+        var root = React.createElement("div", {
+            className: "content",
+            dangerouslySetInnerHTML: {__html: message.payload}
+        });
+        ReactDOM.render(root, document.getElementById('user-svg'));
+        //consider adding keys if people get massive slowdown
     }
-    else if(messagetype == "cout") {
-        consoleout(content);
+    else if(message.type == "cout") {
+        consoleout(message.payload);
     }
-    else if(messagetype == "coin") {
+    else if(message.type == "coin") {
         consolein();
     }
-    else if(messagetype == "cocl") {  //console clear
+    else if(message.type == "cocl") {  //console clear
         $('div.console').empty();
     }
-    else if(messagetype == "cldi") {  //clear div
+    else if(message.type == "cldi") {  //clear div
         $('div.content').empty();
     }
-    else if(messagetype == "html") {
-        $('div.content').append(content);
+    else if(message.type == "html") {
+        $('div.content').append(message.payload);
         refreshhandler();
     }
-    else if(messagetype == "logi") {
+    else if(message.type == "logi") {
         $('#loginmodal').modal({
             escapeClose: false,
             clickClose: false,
@@ -61,7 +64,7 @@ sock.onmessage = function (event) {
         })
     }
     else if(messagetype == "titl") {
-        document.title=content;
+        document.title=message.payload;
     }
     else {
         console.log("message not handled: " + event.data);
@@ -79,8 +82,6 @@ sock.onclose = function(event) {
         layout: 'bottom',
         type: 'alert'
     });
-
-    clearInterval(heartbeat);
 
     setTimeout(function() { startednoty.close(); }, 1000);
 };
