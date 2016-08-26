@@ -40,6 +40,10 @@ public class SparkServer {
 
     }
 
+    void addResourceDir(String dir) {
+        staticFiles.externalLocation(dir);
+    }
+
     void sendMessage(String type, String payload) {
 
 
