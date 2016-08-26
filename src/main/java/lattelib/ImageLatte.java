@@ -1,5 +1,6 @@
 package lattelib;
 
+import com.google.auto.value.AutoValue;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
@@ -11,34 +12,29 @@ import java.net.URL;
 /**
  * Created by charlie on 8/9/16.
  */
-public class ImageLatte {
-    private String fname;
+@AutoValue
+public abstract class ImageLatte {
 
-    ImageLatte(String type, String ref) {
-        if(type.contains("gi")) {
-            fname = giphy(ref);
-        } else if(type.contains("fi")) {
-            fname = ref;
-        } else {
-            fname = "http://media0.giphy.com/media/7beSjLq7J6qfS/giphy.gif";
-        }
-    }
+    abstract String url();
 
-
-    private static String giphy(String tag) {
+    public static ImageLatte fetchGiphy(String ref) {
         try {
-            String uri = "http://api.giphy.com/v1/gifs/random?tag=" + tag.trim().replaceAll(" ", "+") + "&api_key=dc6zaTOxFJmzC";
+            String uri = "http://api.giphy.com/v1/gifs/random?tag=" + ref.trim().replaceAll(" ", "+") + "&api_key=dc6zaTOxFJmzC";
 
             URL giphy = new URL(uri);
 
             JSONObject g = new JSONObject(new JSONTokener(new InputStreamReader(giphy.openStream())));
 
-            return g.getJSONObject("data").getString("image_url");
+            return new AutoValue_ImageLatte(g.getJSONObject("data").getString("image_url"));
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "http://media0.giphy.com/media/7beSjLq7J6qfS/giphy.gif";
+        return new AutoValue_ImageLatte("http://media0.giphy.com/media/7beSjLq7J6qfS/giphy.gif");
+    }
+
+    public String toString() {
+        return url();
     }
 }
