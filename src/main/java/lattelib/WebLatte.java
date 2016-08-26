@@ -176,8 +176,8 @@ public class WebLatte  {
         private String s;
         Line(String s) { this.s = s; }
         public String toString() { return s; }
-        public int toInt() { return Integer.parseInt(s); }
-        public double toDouble() { return Double.parseDouble(s); }
+        public int toInt() { return Integer.parseInt(s.replaceAll("[^\\d]*(\\d+).*", "$1")); }
+        public double toDouble() { return Double.parseDouble(s.replaceAll("[^\\d]*(\\d+\\.?\\d*).*", "$1")); }
         public char toChar(int index) { return s.charAt(index); }
         public char toChar() { return toChar(0); }
     }
