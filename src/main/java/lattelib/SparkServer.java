@@ -24,9 +24,14 @@ public class SparkServer {
     SparkServer(MessageReceiver messageReceiver) {
         this.messageReceiver = messageReceiver;
 
-        port(8080);
+        port(8081);
         webSocket("/websocket", SparkWebSocket.class);
         staticFiles.location("/webroot"); // Static files
+
+        //allows a local file store, but should perhaps
+        //be passed as an optional param?
+        staticFiles.externalLocation(System.getProperty("user.dir"));
+
 
         init();
         awaitInitialization(); // Wait for server to be initialized

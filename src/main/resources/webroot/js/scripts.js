@@ -1,4 +1,4 @@
-var sock = new WebSocket("ws://localhost:8080/websocket");
+var sock = new WebSocket("ws://localhost:8081/websocket");
 
 $( function() {
     $("body").mousemove(function (e) {
