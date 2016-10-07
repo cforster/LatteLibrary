@@ -45,8 +45,8 @@ public class WebLatte  {
      * default constructor
      */
     public WebLatte() {
-//        super("localhost", 8080, new File("webroot/"), true); //last elem is quiet
-        System.out.println("\nRunning! Point chrome to http://localhost:8080/");
+//        super("localhost", 8081, new File("webroot/"), true); //last elem is quiet
+        System.out.println("\nRunning! Point chrome to http://localhost:8081/");
 
         sparkServer = new SparkServer(json -> {
             if(json.getString("type").equals("click")) {
@@ -76,10 +76,6 @@ public class WebLatte  {
         }
 
         clearPaint();
-    }
-
-    public void addDirectory(String directory) {
-//        rootDirs.add(new File(directory));
     }
 
     public void setTitle(String title) {
@@ -172,10 +168,10 @@ public class WebLatte  {
         return new Line(getValue("in"));
     }
 
-    class Line {
+    public class Line {
         private String s;
         Line(String s) { this.s = s; }
-        public String toString() { return s; }
+        public String toString() { return s==null?"":s; }
         public int toInt() { return Integer.parseInt(s.replaceAll("[^\\d]*(\\d+).*", "$1")); }
         public double toDouble() { return Double.parseDouble(s.replaceAll("[^\\d]*(\\d+\\.?\\d*).*", "$1")); }
         public char toChar(int index) { return s.charAt(index); }
