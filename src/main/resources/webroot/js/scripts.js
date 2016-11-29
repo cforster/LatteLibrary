@@ -8,12 +8,15 @@ $( function() {
 
 sock.onopen = function (event) {
     startednoty = noty({
-        text: 'Connected -- app has begun  <span style=\"color:blue;\" class=\"coords\"></span>',
+        text: 'Connected -- app has begun (click to terminate)<span style=\"color:blue;\" class=\"coords\"></span>',
         animation: {
             open: 'animated bounceInUp',  // Animate.css class names
             close: 'animated bounceOutDown' // Animate.css class names
         },
         closeWith: ['click'],
+        callback: {
+            onClose: function() {sock.close();}
+        },
         layout: 'bottom',
         type: 'alert'
     });
