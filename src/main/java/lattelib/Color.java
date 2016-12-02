@@ -53,6 +53,7 @@ public class Color extends java.awt.Color {
     final static public Color Gold = new Color("#FFD700");
     final static public Color GoldenRod = new Color("#DAA520");
     final static public Color Gray = new Color("#808080");
+    final static public Color GreenKelp = new Color("#37392E");
     final static public Color Grey = new Color("#808080");
     final static public Color GreenYellow = new Color("#ADFF2F");
     final static public Color HoneyDew = new Color("#F0FFF0");
