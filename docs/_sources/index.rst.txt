@@ -8,6 +8,8 @@ Welcome to LatteLibrary's documentation!
 
 LatteLib is designed to support java output to a browser.  This documentation is a work in progress.  The full code base is at https://github.com/cforster/lattelibrary
 
+You can download a jar at https://goo.gl/5fT0MK
+
 .. toctree::
    :maxdepth: 2
 

@@ -47,6 +47,7 @@ the println() function can accept html tags, so if you want to style or color yo
 to get the data type you are hoping for, you should call the appropriate "to" function.  for example:
 
 .. code-block:: java
+
     String s = frame.nextLine().toString();
     int i = frame.nextLine().toInt();
     double d = frame.nextLine().toDouble();

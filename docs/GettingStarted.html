@@ -82,6 +82,12 @@
 <dd>this will get some input from the webframe.</dd>
 </dl>
 <p>to get the data type you are hoping for, you should call the appropriate &#8220;to&#8221; function.  for example:</p>
+<div class="highlight-java"><div class="highlight"><pre><span></span><span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="na">nextLine</span><span class="o">().</span><span class="na">toString</span><span class="o">();</span>
+<span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="na">nextLine</span><span class="o">().</span><span class="na">toInt</span><span class="o">();</span>
+<span class="kt">double</span> <span class="n">d</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="na">nextLine</span><span class="o">().</span><span class="na">toDouble</span><span class="o">();</span>
+<span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">frame</span><span class="o">.</span><span class="na">nextLine</span><span class="o">().</span><span class="na">toChar</span><span class="o">();</span>
+</pre></div>
+</div>
 <ul class="simple">
 <li>the <code class="docutils literal"><span class="pre">toInt()</span></code> and <code class="docutils literal"><span class="pre">toDouble()</span></code> will get a number anywhere in the input line.  so for example &#8220;I am 3 years old&#8221; would return 3</li>
 <li>the <code class="docutils literal"><span class="pre">toChar()</span></code> will get the first char, so &#8220;charlie&#8221; would return &#8216;c&#8217;</li>
@@ -100,7 +106,7 @@
 8</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DrawDemo</span> <span class="o">{</span>
     <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
         <span class="n">WebLatte</span> <span class="n">frame</span> <span class="o">=</span> <span class="k">new</span> <span class="n">WebLatte</span><span class="o">();</span>
-        <span class="n">frame</span><span class="o">.</span><span class="na">drawCircle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">Aqua</span><span class="o">);</span>
+        <span class="n">frame</span><span class="o">.</span><span class="na">drawCircle</span><span class="o">(</span><span class="mi">100</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="n">ColorLatte</span><span class="o">.</span><span class="na">Aqua</span><span class="o">);</span>
         <span class="n">frame</span><span class="o">.</span><span class="na">drawImage</span><span class="o">(</span><span class="s">&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/800px-Smiley.svg.png&quot;</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">200</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">50</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
             <span class="n">frame</span><span class="o">.</span><span class="na">paint</span><span class="o">();</span>
     <span class="o">}</span>
@@ -108,7 +114,7 @@
 </pre></div>
 </td></tr></table></div>
 <p>this will draw an aqua circle at x,y = (100,100) with a 30 pixel radius.  For the image, you may use a link to an image online, or you can include a file in your project folder and reference that.  PRO TIP: WebLatte serves files from the system property <code class="docutils literal"><span class="pre">user.dir</span></code>.</p>
-<p>You can set a special color if you like by replacing the color with a color constructed with RGB: <code class="docutils literal"><span class="pre">frame.drawCircle(1,1,1,new</span> <span class="pre">Color(255,</span> <span class="pre">255,</span> <span class="pre">0));</span></code>.  you can get color values using the Digital Color Meter or at kuler.adobe.com.</p>
+<p>You can set a special color if you like by replacing the color with a color constructed with RGB: <code class="docutils literal"><span class="pre">frame.drawCircle(1,1,1,new</span> <span class="pre">ColorLatte(255,</span> <span class="pre">255,</span> <span class="pre">0));</span></code>.  you can get color values using the Digital Color Meter or at kuler.adobe.com.</p>
 </div>
 <div class="section" id="animation">
 <h2>Animation<a class="headerlink" href="#animation" title="Permalink to this headline">¶</a></h2>
@@ -132,7 +138,7 @@
 
         <span class="k">while</span><span class="o">(</span><span class="kc">true</span><span class="o">)</span> <span class="o">{</span>
             <span class="n">frame</span><span class="o">.</span><span class="na">clearPaint</span><span class="o">();</span>
-            <span class="n">frame</span><span class="o">.</span><span class="na">drawRectangle</span><span class="o">(</span><span class="n">move</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">Color</span><span class="o">.</span><span class="na">Brown</span><span class="o">);</span>
+            <span class="n">frame</span><span class="o">.</span><span class="na">drawRectangle</span><span class="o">(</span><span class="n">move</span><span class="o">,</span> <span class="mi">100</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">30</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="n">ColorLatte</span><span class="o">.</span><span class="na">Brown</span><span class="o">);</span>
                     <span class="n">frame</span><span class="o">.</span><span class="na">paint</span><span class="o">();</span>
                     <span class="n">move</span><span class="o">++;</span>
         <span class="o">}</span>
