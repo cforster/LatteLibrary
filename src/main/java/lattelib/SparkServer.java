@@ -77,7 +77,7 @@ public class SparkServer {
 
         @OnWebSocketMessage
         public void message(Session session, String message) throws IOException {
-            System.out.println("Got: " + message);   // Print message
+            //System.out.println("Got: " + message);   // Print message
 
             JSONObject o = new JSONObject(message);
             messageReceiver.receive(o);

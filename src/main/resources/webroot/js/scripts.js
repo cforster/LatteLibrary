@@ -1,95 +1,118 @@
-var sock = new WebSocket("ws://localhost:8081/websocket");
+wsUri =  "ws://localhost:8081/websocket";
+var sock = new WebSocket(wsUri);
 
-$( function() {
-    $("body").mousemove(function (e) {
-        $('span.coords').empty().append("(" + e.pageX + ", " + e.pageY + ")");
-    });
-});
-
-sock.onopen = function (event) {
-    startednoty = noty({
-        text: 'Connected -- app has begun (click to terminate)<span style=\"color:blue;\" class=\"coords\"></span>',
-        animation: {
-            open: 'animated bounceInUp',  // Animate.css class names
-            close: 'animated bounceOutDown' // Animate.css class names
-        },
-        closeWith: ['click'],
-        callback: {
-            onClose: function() {sock.close();}
-        },
-        layout: 'bottom',
-        type: 'alert'
-    });
-};
-sock.onmessage = function (event) {
-    message = JSON.parse(event.data);
-
-    if(message.type == "svgt") {
-        //$('#user-svg').replaceWith(message.payload);   //this is ugly, maybe use underscore?
-
-        //the svg gets updated using reactjs:
-        var root = React.createElement("div", {
-            className: "content",
-            dangerouslySetInnerHTML: {__html: message.payload}
+    sock.onopen = function (event) {
+        startednoty = noty({
+            text: 'Connected -- app has begun (click to terminate)<span style=\"color:blue;\" class=\"coords\"></span>',
+            animation: {
+                open: 'animated bounceInUp',  // Animate.css class names
+                close: 'animated bounceOutDown' // Animate.css class names
+            },
+            closeWith: ['click'],
+            callback: {
+                onClose: function () {
+                    sock.close();
+                }
+            },
+            layout: 'bottom',
+            type: 'alert'
         });
-        ReactDOM.render(root, document.getElementById('user-svg'));
-        //consider adding keys if people get massive slowdown
-    }
-    else if(message.type == "cout") {
-        consoleout(message.payload);
-    }
-    else if(message.type == "coin") {
-        consolein();
-    }
-    else if(message.type == "cocl") {  //console clear
-        $('div.console').empty();
-    }
-    else if(message.type == "cldi") {  //clear div
-        $('div.content').empty();
-    }
-    else if(message.type == "html") {
-        $('div.content').append(message.payload);
-        refreshhandler();
-    }
-    else if(message.type == "logi") {
-        $('#loginmodal').modal({
-            escapeClose: false,
-            clickClose: false,
-            showClose: false,
-            fadeDuration: 100
+    };
+    sock.onmessage = function (event) {
+        message = JSON.parse(event.data);
+
+        if (message.type == "svgt") {
+            //the svg gets updated using reactjs:
+            var root = React.createElement("div", {
+                className: "content",
+                dangerouslySetInnerHTML: {__html: message.payload}
+            });
+            ReactDOM.render(root, document.getElementById('user-svg'));
+            //consider adding keys if people get massive slowdown
+        }
+        else if (message.type == "cout") {
+            consoleout(message.payload);
+        }
+        else if (message.type == "coin") {
+            consolein();
+        }
+        else if (message.type == "cocl") {  //console clear
+            $('div.console').empty();
+        }
+        else if (message.type == "cldi") {  //clear div
+            $('div.content').empty();
+        }
+        else if (message.type == "html") {
+            $('div.content').append(message.payload);
+            refreshhandler();
+        }
+        else if (message.type == "logi") {
+            $('#loginmodal').modal({
+                escapeClose: false,
+                clickClose: false,
+                showClose: false,
+                fadeDuration: 100
+            });
+            $("#loginbtn").on('click', function (e) {
+                if ($('input#username').val() != "") {
+                    $.modal.close();
+                    sock.send("{\"type\": login-success}");
+                }  //for now, any content will do.
+                //todo: replace with actual auth.
+            })
+        }
+        else if (messagetype == "titl") {
+            document.title = message.payload;
+        }
+        else {
+            console.log("message not handled: " + event.data);
+        }
+    };
+    sock.onclose = function (event) {
+        endnoty = noty({
+            text: 'Disconnected -- app has terminated',
+            animation: {
+                open: 'animated bounceInUp', // Animate.css class names
+                close: 'animated bounceOutUp' // Animate.css class names
+            },
+            killer: true,
+            closeWith: ['click'],
+            layout: 'bottom',
+            type: 'alert'
         });
-        $("#loginbtn").on('click', function (e) {
-            if($('input#username').val()!="") {
-                $.modal.close();
-                sock.send("{\"type\": login-success}");
-            }  //for now, any content will do.
-            //todo: replace with actual auth.
-        })
-    }
-    else if(messagetype == "titl") {
-        document.title=message.payload;
-    }
-    else {
-        console.log("message not handled: " + event.data);
-    }
-};
-sock.onclose = function(event) {
-    endnoty = noty({
-        text: 'Disconnected -- app has terminated',
-        animation: {
-            open: 'animated bounceInUp', // Animate.css class names
-            close: 'animated bounceOutUp' // Animate.css class names
-        },
-        killer: true,
-        closeWith: ['click'],
-        layout: 'bottom',
-        type: 'alert'
+
+        setTimeout(function () {
+            startednoty.close();
+        }, 1000);
+
+        //reload the page when the server is back up:
+        setInterval(function() {
+            $.ajax({
+                url  : "/resources/images/bunny.jpeg", /* or other resource */
+                type : "HEAD"
+            })
+                .done(function() {
+                    location.reload();
+                });
+        }, 1500); /* 1.5 seconds */
+
+    };
+
+//    function check(){
+//        if(!ws || ws.readyState == 3) start();
+//    }
+//
+//    start();
+//
+//    setInterval(check, 1000);
+//}
+
+
+    $( function() {
+        $("body").mousemove(function (e) {
+            $('span.coords').empty().append("(" + e.pageX + ", " + e.pageY + ")");
+        });
     });
-
-    setTimeout(function() { startednoty.close(); }, 1000);
-};
-
-
 
 function refreshhandler() {
     $('input').on('input', function () {

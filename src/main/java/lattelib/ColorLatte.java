@@ -11,7 +11,9 @@ public class ColorLatte {
     final static public ColorLatte Azure = new ColorLatte("#f0fff");
     final static public ColorLatte Beige = new ColorLatte("#f5f5dc");
     final static public ColorLatte Bisque = new ColorLatte("#ffe4c4");
+    final static public ColorLatte BLACK = new ColorLatte("#000000");
     final static public ColorLatte BlanchedAlmond = new ColorLatte("#FFebcd");
+    final static public ColorLatte BLUE = new ColorLatte("#0000FF");
     final static public ColorLatte BlueViolet = new ColorLatte("#8A2be2");
     final static public ColorLatte Brown = new ColorLatte("#a52a2a");
     final static public ColorLatte BurlyWood = new ColorLatte("#deb887");
@@ -22,6 +24,7 @@ public class ColorLatte {
     final static public ColorLatte CornflowerBlue = new ColorLatte("#6495ed");
     final static public ColorLatte Cornsilk = new ColorLatte("#FFF8DC");
     final static public ColorLatte Crimson = new ColorLatte("#dc143c");
+    final static public ColorLatte CYAN = new ColorLatte("#00FFFF");
     final static public ColorLatte DarkBlue = new ColorLatte("#00008b");
     final static public ColorLatte DarkCyan = new ColorLatte("#008b8b");
     final static public ColorLatte DarkGoldenRod = new ColorLatte("#b8860b");
@@ -54,6 +57,7 @@ public class ColorLatte {
     final static public ColorLatte GoldenRod = new ColorLatte("#DAA520");
     final static public ColorLatte Gray = new ColorLatte("#808080");
     final static public ColorLatte Grey = new ColorLatte("#808080");
+    final static public ColorLatte GREEN = new ColorLatte("#008000");
     final static public ColorLatte GreenYellow = new ColorLatte("#ADFF2F");
     final static public ColorLatte HoneyDew = new ColorLatte("#F0FFF0");
     final static public ColorLatte HotPink = new ColorLatte("#FF69B4");
@@ -83,7 +87,7 @@ public class ColorLatte {
     final static public ColorLatte Lime = new ColorLatte("#00ff00");
     final static public ColorLatte LimeGreen = new ColorLatte("#32cd32");
     final static public ColorLatte Linen = new ColorLatte("#FAF0E6");
-    final static public ColorLatte Magenta = new ColorLatte("#FF00FF");
+    final static public ColorLatte MAGENTA = new ColorLatte("#FF00FF");
     final static public ColorLatte Maroon = new ColorLatte("#800000");
     final static public ColorLatte MediumAquaMarine = new ColorLatte("#66CDAA");
     final static public ColorLatte MediumBlue = new ColorLatte("#0000CD");
@@ -115,6 +119,7 @@ public class ColorLatte {
     final static public ColorLatte Plum = new ColorLatte("#DDA0DD");
     final static public ColorLatte PowderBlue = new ColorLatte("#B0E0E6");
     final static public ColorLatte Purple = new ColorLatte("#800080");
+    final static public ColorLatte RED = new ColorLatte("#FF0000");
     final static public ColorLatte RebeccaPurple = new ColorLatte("#663399");
     final static public ColorLatte RosyBrown = new ColorLatte("#BC8F8F");
     final static public ColorLatte RoyalBlue = new ColorLatte("#4169E1");
@@ -139,7 +144,9 @@ public class ColorLatte {
     final static public ColorLatte Turquoise = new ColorLatte("#40E0D0");
     final static public ColorLatte Violet = new ColorLatte("#EE82EE");
     final static public ColorLatte Wheat = new ColorLatte("#F5DEB3");
+    final static public ColorLatte WHITE = new ColorLatte("#FFFFFF");
     final static public ColorLatte WhiteSmoke = new ColorLatte("#F5F5F5");
+    final static public ColorLatte YELLOW = new ColorLatte("#FFFF00");
     final static public ColorLatte YellowGreen = new ColorLatte("#9ACD32");
 
     private int r, g, b;

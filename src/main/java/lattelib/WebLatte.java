@@ -330,7 +330,7 @@ public class WebLatte  {
      * @param color the color of the rectangle
      * @return the rectangle element, which you can modify before you paint.
      */
-    public Element drawRectangle(double x, double y, double w, double h, double rot, Color color) {
+    public Element drawRectangle(double x, double y, double w, double h, double rot, ColorLatte color) {
         Element rectangle = svgdoc.createElementNS(svgNS, "rect");
         rectangle.setAttributeNS(null, "x", Double.toString(x));
         rectangle.setAttributeNS(null, "y", Double.toString(y));
@@ -352,7 +352,7 @@ public class WebLatte  {
      * @param color the color of the circle
      * @return the circle element, which you can modify before you paint.
      */
-    public Element drawCircle(double cx, double cy, double r, Color color) {
+    public Element drawCircle(double cx, double cy, double r, ColorLatte color) {
         Element circle = svgdoc.createElementNS(svgNS, "circle");
         circle.setAttributeNS(null, "cx", Double.toString(cx));
         circle.setAttributeNS(null, "cy", Double.toString(cy));
@@ -374,7 +374,7 @@ public class WebLatte  {
      * @param color the color of the ellipse
      * @return the ellipse element, which you can modify before you paint.
      */
-    public Element drawEllipse(double cx, double cy, double rx, double ry, double rot, Color color) {
+    public Element drawEllipse(double cx, double cy, double rx, double ry, double rot, ColorLatte color) {
         Element ellipse = svgdoc.createElementNS(svgNS, "ellipse");
         ellipse.setAttributeNS(null, "cx", Double.toString(cx));
         ellipse.setAttributeNS(null, "cy", Double.toString(cy));
@@ -398,7 +398,7 @@ public class WebLatte  {
      * @param color the color of the line
      * @return the line element, which you can modify before you paint.
      */
-    public Element drawLine(double x1, double y1, double x2, double y2, double thick, Color color) {
+    public Element drawLine(double x1, double y1, double x2, double y2, double thick, ColorLatte color) {
         Element line = svgdoc.createElementNS(svgNS, "line");
         line.setAttributeNS(null, "x1", Double.toString(x1));
         line.setAttributeNS(null, "y1", Double.toString(y1));
@@ -423,7 +423,7 @@ public class WebLatte  {
      * @param color the color of the text
      * @return the text element, which you can modify before you paint.
      */
-    public Element drawText(String s, double x, double y, int size, double rot, Color color)
+    public Element drawText(String s, double x, double y, int size, double rot, ColorLatte color)
     {
         Element text = svgdoc.createElementNS(svgNS, "text");
         text.setAttributeNS(null, "x", Double.toString(x));
