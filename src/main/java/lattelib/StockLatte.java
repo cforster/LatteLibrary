@@ -7,10 +7,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.*;
@@ -45,18 +42,18 @@ public abstract class StockLatte {
     static {
         try {
             ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-            File file = new File(classLoader.getResource("data/tickers.txt").getFile());
-            for (Scanner sc = new Scanner(file); sc.hasNext(); ) {
+            InputStream is = (InputStream) classLoader.getResource("data/tickers.txt").getContent();
+            for (Scanner sc = new Scanner(is); sc.hasNext(); ) {
                 tickers.add(sc.nextLine());
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             tickers.add("aapl");
         }
     }
 
     //get a random stock:
-    static StockLatte fetch() {
+    public static StockLatte fetch() {
         StockLatte ret = null;
         Random gen = new Random();
         while(ret==null) {
@@ -66,7 +63,7 @@ public abstract class StockLatte {
     }
 
     //given a ticker:
-    static StockLatte fetch(String symbol) {
+    public static StockLatte fetch(String symbol) {
         try {
             Document doc = Jsoup.connect(
                     "http://" + CACHESERVERADDR + "/MODApis/Api/v2/Quote?symbol="
