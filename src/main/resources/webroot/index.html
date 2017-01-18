@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Web Latte</title>
+
+    <style>
+        html, body, svg {
+            width:  100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+            position:absolute;
+        }
+        svg {
+            z-index: -1;
+        }
+        div.console {
+            margin: 15px;
+        }
+        div.console-element {
+            color: black;
+            font-family: monospace;
+        }
+        span.console-symbol {
+            font-weight:bolder;
+        }
+        input.in {
+            border: none;
+            font-family: monospace;
+            font-size: inherit;
+            margin: 0px;
+            width:95%;
+            vertical-align: top;
+            padding: 0 0 100px 0;
+            background: transparent;
+        }
+        input.in:focus {
+            outline:none;
+        }
+    </style>
+    <link rel="stylesheet" href="css/animate.min.css">
+
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
+    <script src="https://js.leapmotion.com/leap-0.6.4.min.js"></script>
+    <script src="js/jquery.modal.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/scripts.js"></script>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.js"></script>
+
+
+    <link rel="stylesheet" href="css/jquery.modal.min.css" type="text/css" media="screen" />
+
+</head>
+<body>
+<div id="user-svg">
+
+
+</div>
+
+<svg>
+    <circle id="leap-circle" cx=-10 cy=-10 r="5px" fill="red"></circle>
+</svg>
+<div class="console"></div>
+<div class="content"></div>
+
+
+<!-- Login Modal-->
+<div class="modal" id="loginmodal" style="display:none;">
+    <h4>Log In Here</h4>
+    <p><input type="text" id="username" name="username" /></p>
+    <button type="button" id="loginbtn">Log In</button>
+</div><!-- /.modal -->
+</body>
+</html>
