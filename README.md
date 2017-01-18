@@ -1,4 +1,0 @@
-# LatteLibrary
-
-www.lattelib.com
-
