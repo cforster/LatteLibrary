@@ -1,7 +1,8 @@
 
 to generate javadoc to rst:
-`javasphinx-apidoc -o /Users/charlie/IdeaProjects/LatteLibrary/doc/ /Users/charlie/IdeaProjects/LatteLibrary/src/main/java/lattelib/`
-probably needs the -u for update
+`javasphinx-apidoc -u -o /Users/charlie/IdeaProjects/LatteLibrary/doc/ /Users/charlie/IdeaProjects/LatteLibrary/src/main/java/lattelib/`
 
-to generate the html: `make html` in this folder
+
+to generate the html: `make gh-pages` in the docs-source folder
+
 
