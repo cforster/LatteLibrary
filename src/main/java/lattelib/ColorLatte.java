@@ -58,6 +58,7 @@ public class ColorLatte {
     final static public ColorLatte Gray = new ColorLatte("#808080");
     final static public ColorLatte Grey = new ColorLatte("#808080");
     final static public ColorLatte GREEN = new ColorLatte("#008000");
+    final static public ColorLatte GreenKelp = new ColorLatte("#37392E");
     final static public ColorLatte GreenYellow = new ColorLatte("#ADFF2F");
     final static public ColorLatte HoneyDew = new ColorLatte("#F0FFF0");
     final static public ColorLatte HotPink = new ColorLatte("#FF69B4");
