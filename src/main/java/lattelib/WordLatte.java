@@ -29,11 +29,12 @@ public abstract class WordLatte {
     static {
         try {
             ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-            File file = new File(classLoader.getResource("data/words.txt").getFile());
-            for (Scanner sc = new Scanner(file); sc.hasNext(); ) {
+            //		File f = new File(classLoader.getResource("data/words.txt").getFile());
+            InputStream is = (InputStream) classLoader.getResource("data/words.txt").getContent();
+            for (Scanner sc = new Scanner(is); sc.hasNext(); ) {
                 freq.add(sc.nextLine());
             }
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
             freq.add("happy");
         }
@@ -111,7 +112,9 @@ public abstract class WordLatte {
 
     public int exampleCount() { return examples().size(); }
     public String example(int i) { return examples().get(i % exampleCount()); }
-    public String example() { return examples().get(0); }
+    public String example() {
+        return examples().size()>0?examples().get(0):"no example available";
+    }
     public int definitionCount() { return definitions().size(); }
     public String definition(int i) { return definitions().get(i % definitionCount()); }
     public String definition() { return definition(0); }
