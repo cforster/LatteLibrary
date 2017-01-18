@@ -44,55 +44,6 @@ WebLatte
 
    Created by charlie on 7/19/16.
 
-Fields
-------
-clickLatch
-^^^^^^^^^^
-
-.. java:field:: protected CountDownLatch clickLatch
-   :outertype: WebLatte
-
-clickValue
-^^^^^^^^^^
-
-.. java:field:: protected String clickValue
-   :outertype: WebLatte
-
-dataset
-^^^^^^^
-
-.. java:field:: protected Map<String, String> dataset
-   :outertype: WebLatte
-
-impl
-^^^^
-
-.. java:field::  DOMImplementation impl
-   :outertype: WebLatte
-
-inputLatch
-^^^^^^^^^^
-
-.. java:field:: protected CountDownLatch inputLatch
-   :outertype: WebLatte
-
-loginLatch
-^^^^^^^^^^
-
-.. java:field:: protected CountDownLatch loginLatch
-   :outertype: WebLatte
-
-svgNS
-^^^^^
-
-.. java:field::  String svgNS
-   :outertype: WebLatte
-
-svgdoc
-^^^^^^
-
-.. java:field::  Document svgdoc
-   :outertype: WebLatte
 
 Constructors
 ------------

@@ -1,39 +1,34 @@
 Reference
 =========
 
-This page outlines all of the possible functions, to get started you should probably look at :doc:`examples`.
+This page outlines all of the possible functions, to get started you should probably look at :doc:`Examples`.
 There are three main types of Latte objects: `Graphics`, `Sound` and `Data`.
 
 Graphics
 --------
 
-.. automodule:: WebLatte
-:members:
+.. toctree::
+    :maxdepth: 1
 
-.. automodule:: ImageLatte
-:members:
-
-.. automodule:: Color
-:members:
+    lattelib/WebLatte
+    lattelib/ImageLatte
+    lattelib/ColorLatte
 
 Sound
 -----
 
-.. automodule:: MidiLatte
-:members:
+.. toctree::
+    :maxdepth: 1
 
-.. automodule:: SayLatte
-:members:
-
-.. automodule:: SoundLatte
-:members:
+    lattelib/MidiLatte
+    lattelib/SayLatte
+    lattelib/SoundLatte
 
 Data
 ----
 
-.. automodule:: WordLatte
-:members:
+.. toctree::
+    :maxdepth: 1
 
-.. automodule:: StockLatte
-:members:
-
+    lattelib/WordLatte
+    lattelib/StockLatte

@@ -67,7 +67,7 @@ You might be interested in drawing to the screen.  The basic process for this is
     public class DrawDemo {
         public static void main(String[] args) {
             WebLatte frame = new WebLatte();
-            frame.drawCircle(100, 100, 30, Color.Aqua);
+            frame.drawCircle(100, 100, 30, ColorLatte.Aqua);
             frame.drawImage("https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Smiley.svg/800px-Smiley.svg.png", 200, 200, 50, 50, 0);
     		frame.paint();
         }
@@ -75,7 +75,7 @@ You might be interested in drawing to the screen.  The basic process for this is
 
 this will draw an aqua circle at x,y = (100,100) with a 30 pixel radius.  For the image, you may use a link to an image online, or you can include a file in your project folder and reference that.  PRO TIP: WebLatte serves files from the system property ``user.dir``.
 
-You can set a special color if you like by replacing the color with a color constructed with RGB: ``frame.drawCircle(1,1,1,new Color(255, 255, 0));``.  you can get color values using the Digital Color Meter or at kuler.adobe.com.
+You can set a special color if you like by replacing the color with a color constructed with RGB: ``frame.drawCircle(1,1,1,new ColorLatte(255, 255, 0));``.  you can get color values using the Digital Color Meter or at kuler.adobe.com.
 
 Animation
 ---------
@@ -92,7 +92,7 @@ You can animate things you draw by looping and including the paint() function.
 
             while(true) {
                 frame.clearPaint();
-                frame.drawRectangle(move, 100, 30, 30, 0, Color.Brown);
+                frame.drawRectangle(move, 100, 30, 30, 0, ColorLatte.Brown);
         		frame.paint();
         		move++;
             }
