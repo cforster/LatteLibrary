@@ -1,0 +1,862 @@
+Color
+=====
+
+.. java:package:: lattelib
+   :noindex:
+
+.. java:type:: public class Color extends java.awt.Color
+
+   Created by charlie on 7/24/16.
+
+Fields
+------
+AliceBlue
+^^^^^^^^^
+
+.. java:field:: public static final Color AliceBlue
+   :outertype: Color
+
+AntiqueWhite
+^^^^^^^^^^^^
+
+.. java:field:: public static final Color AntiqueWhite
+   :outertype: Color
+
+Aqua
+^^^^
+
+.. java:field:: public static final Color Aqua
+   :outertype: Color
+
+Aquamarine
+^^^^^^^^^^
+
+.. java:field:: public static final Color Aquamarine
+   :outertype: Color
+
+Azure
+^^^^^
+
+.. java:field:: public static final Color Azure
+   :outertype: Color
+
+Beige
+^^^^^
+
+.. java:field:: public static final Color Beige
+   :outertype: Color
+
+Bisque
+^^^^^^
+
+.. java:field:: public static final Color Bisque
+   :outertype: Color
+
+BlanchedAlmond
+^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color BlanchedAlmond
+   :outertype: Color
+
+BlueViolet
+^^^^^^^^^^
+
+.. java:field:: public static final Color BlueViolet
+   :outertype: Color
+
+Brown
+^^^^^
+
+.. java:field:: public static final Color Brown
+   :outertype: Color
+
+BurlyWood
+^^^^^^^^^
+
+.. java:field:: public static final Color BurlyWood
+   :outertype: Color
+
+CadetBlue
+^^^^^^^^^
+
+.. java:field:: public static final Color CadetBlue
+   :outertype: Color
+
+Chartreuse
+^^^^^^^^^^
+
+.. java:field:: public static final Color Chartreuse
+   :outertype: Color
+
+Chocolate
+^^^^^^^^^
+
+.. java:field:: public static final Color Chocolate
+   :outertype: Color
+
+Coral
+^^^^^
+
+.. java:field:: public static final Color Coral
+   :outertype: Color
+
+CornflowerBlue
+^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color CornflowerBlue
+   :outertype: Color
+
+Cornsilk
+^^^^^^^^
+
+.. java:field:: public static final Color Cornsilk
+   :outertype: Color
+
+Crimson
+^^^^^^^
+
+.. java:field:: public static final Color Crimson
+   :outertype: Color
+
+DarkBlue
+^^^^^^^^
+
+.. java:field:: public static final Color DarkBlue
+   :outertype: Color
+
+DarkCyan
+^^^^^^^^
+
+.. java:field:: public static final Color DarkCyan
+   :outertype: Color
+
+DarkGoldenRod
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color DarkGoldenRod
+   :outertype: Color
+
+DarkGray
+^^^^^^^^
+
+.. java:field:: public static final Color DarkGray
+   :outertype: Color
+
+DarkGreen
+^^^^^^^^^
+
+.. java:field:: public static final Color DarkGreen
+   :outertype: Color
+
+DarkGrey
+^^^^^^^^
+
+.. java:field:: public static final Color DarkGrey
+   :outertype: Color
+
+DarkKhaki
+^^^^^^^^^
+
+.. java:field:: public static final Color DarkKhaki
+   :outertype: Color
+
+DarkMagenta
+^^^^^^^^^^^
+
+.. java:field:: public static final Color DarkMagenta
+   :outertype: Color
+
+DarkOliveGreen
+^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color DarkOliveGreen
+   :outertype: Color
+
+DarkOrange
+^^^^^^^^^^
+
+.. java:field:: public static final Color DarkOrange
+   :outertype: Color
+
+DarkOrchid
+^^^^^^^^^^
+
+.. java:field:: public static final Color DarkOrchid
+   :outertype: Color
+
+DarkPink
+^^^^^^^^
+
+.. java:field:: public static final Color DarkPink
+   :outertype: Color
+
+DarkRed
+^^^^^^^
+
+.. java:field:: public static final Color DarkRed
+   :outertype: Color
+
+DarkSalmon
+^^^^^^^^^^
+
+.. java:field:: public static final Color DarkSalmon
+   :outertype: Color
+
+DarkSeaGreen
+^^^^^^^^^^^^
+
+.. java:field:: public static final Color DarkSeaGreen
+   :outertype: Color
+
+DarkSlateGray
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color DarkSlateGray
+   :outertype: Color
+
+DarkTurquoise
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color DarkTurquoise
+   :outertype: Color
+
+DarkViolet
+^^^^^^^^^^
+
+.. java:field:: public static final Color DarkViolet
+   :outertype: Color
+
+DeepSkyBlue
+^^^^^^^^^^^
+
+.. java:field:: public static final Color DeepSkyBlue
+   :outertype: Color
+
+DimGray
+^^^^^^^
+
+.. java:field:: public static final Color DimGray
+   :outertype: Color
+
+DimGrey
+^^^^^^^
+
+.. java:field:: public static final Color DimGrey
+   :outertype: Color
+
+DodgerBlue
+^^^^^^^^^^
+
+.. java:field:: public static final Color DodgerBlue
+   :outertype: Color
+
+FireBrick
+^^^^^^^^^
+
+.. java:field:: public static final Color FireBrick
+   :outertype: Color
+
+FloralWhite
+^^^^^^^^^^^
+
+.. java:field:: public static final Color FloralWhite
+   :outertype: Color
+
+ForestGreen
+^^^^^^^^^^^
+
+.. java:field:: public static final Color ForestGreen
+   :outertype: Color
+
+Fuchsia
+^^^^^^^
+
+.. java:field:: public static final Color Fuchsia
+   :outertype: Color
+
+Gainsboro
+^^^^^^^^^
+
+.. java:field:: public static final Color Gainsboro
+   :outertype: Color
+
+GhostWhite
+^^^^^^^^^^
+
+.. java:field:: public static final Color GhostWhite
+   :outertype: Color
+
+Gold
+^^^^
+
+.. java:field:: public static final Color Gold
+   :outertype: Color
+
+GoldenRod
+^^^^^^^^^
+
+.. java:field:: public static final Color GoldenRod
+   :outertype: Color
+
+Gray
+^^^^
+
+.. java:field:: public static final Color Gray
+   :outertype: Color
+
+GreenYellow
+^^^^^^^^^^^
+
+.. java:field:: public static final Color GreenYellow
+   :outertype: Color
+
+Grey
+^^^^
+
+.. java:field:: public static final Color Grey
+   :outertype: Color
+
+HoneyDew
+^^^^^^^^
+
+.. java:field:: public static final Color HoneyDew
+   :outertype: Color
+
+HotPink
+^^^^^^^
+
+.. java:field:: public static final Color HotPink
+   :outertype: Color
+
+IndianRed
+^^^^^^^^^
+
+.. java:field:: public static final Color IndianRed
+   :outertype: Color
+
+Indigo
+^^^^^^
+
+.. java:field:: public static final Color Indigo
+   :outertype: Color
+
+Ivory
+^^^^^
+
+.. java:field:: public static final Color Ivory
+   :outertype: Color
+
+Khaki
+^^^^^
+
+.. java:field:: public static final Color Khaki
+   :outertype: Color
+
+Lavender
+^^^^^^^^
+
+.. java:field:: public static final Color Lavender
+   :outertype: Color
+
+LavenderBlush
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color LavenderBlush
+   :outertype: Color
+
+LawnGreen
+^^^^^^^^^
+
+.. java:field:: public static final Color LawnGreen
+   :outertype: Color
+
+LemonChiffon
+^^^^^^^^^^^^
+
+.. java:field:: public static final Color LemonChiffon
+   :outertype: Color
+
+LightBlue
+^^^^^^^^^
+
+.. java:field:: public static final Color LightBlue
+   :outertype: Color
+
+LightCoral
+^^^^^^^^^^
+
+.. java:field:: public static final Color LightCoral
+   :outertype: Color
+
+LightCyan
+^^^^^^^^^
+
+.. java:field:: public static final Color LightCyan
+   :outertype: Color
+
+LightGoldenRodYellow
+^^^^^^^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color LightGoldenRodYellow
+   :outertype: Color
+
+LightGray
+^^^^^^^^^
+
+.. java:field:: public static final Color LightGray
+   :outertype: Color
+
+LightGreen
+^^^^^^^^^^
+
+.. java:field:: public static final Color LightGreen
+   :outertype: Color
+
+LightGrey
+^^^^^^^^^
+
+.. java:field:: public static final Color LightGrey
+   :outertype: Color
+
+LightPink
+^^^^^^^^^
+
+.. java:field:: public static final Color LightPink
+   :outertype: Color
+
+LightSalmon
+^^^^^^^^^^^
+
+.. java:field:: public static final Color LightSalmon
+   :outertype: Color
+
+LightSeaGreen
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color LightSeaGreen
+   :outertype: Color
+
+LightSkyBlue
+^^^^^^^^^^^^
+
+.. java:field:: public static final Color LightSkyBlue
+   :outertype: Color
+
+LightSlateGray
+^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color LightSlateGray
+   :outertype: Color
+
+LightSlateGrey
+^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color LightSlateGrey
+   :outertype: Color
+
+LightSteelBlue
+^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color LightSteelBlue
+   :outertype: Color
+
+LightYellow
+^^^^^^^^^^^
+
+.. java:field:: public static final Color LightYellow
+   :outertype: Color
+
+Lime
+^^^^
+
+.. java:field:: public static final Color Lime
+   :outertype: Color
+
+LimeGreen
+^^^^^^^^^
+
+.. java:field:: public static final Color LimeGreen
+   :outertype: Color
+
+Linen
+^^^^^
+
+.. java:field:: public static final Color Linen
+   :outertype: Color
+
+Magenta
+^^^^^^^
+
+.. java:field:: public static final Color Magenta
+   :outertype: Color
+
+Maroon
+^^^^^^
+
+.. java:field:: public static final Color Maroon
+   :outertype: Color
+
+MediumAquaMarine
+^^^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color MediumAquaMarine
+   :outertype: Color
+
+MediumBlue
+^^^^^^^^^^
+
+.. java:field:: public static final Color MediumBlue
+   :outertype: Color
+
+MediumOrchid
+^^^^^^^^^^^^
+
+.. java:field:: public static final Color MediumOrchid
+   :outertype: Color
+
+MediumPurple
+^^^^^^^^^^^^
+
+.. java:field:: public static final Color MediumPurple
+   :outertype: Color
+
+MediumSeaGreen
+^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color MediumSeaGreen
+   :outertype: Color
+
+MediumTurquoise
+^^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color MediumTurquoise
+   :outertype: Color
+
+MediumVioletRed
+^^^^^^^^^^^^^^^
+
+.. java:field:: public static final Color MediumVioletRed
+   :outertype: Color
+
+MidnightBlue
+^^^^^^^^^^^^
+
+.. java:field:: public static final Color MidnightBlue
+   :outertype: Color
+
+MintCream
+^^^^^^^^^
+
+.. java:field:: public static final Color MintCream
+   :outertype: Color
+
+MistyRose
+^^^^^^^^^
+
+.. java:field:: public static final Color MistyRose
+   :outertype: Color
+
+Moccasin
+^^^^^^^^
+
+.. java:field:: public static final Color Moccasin
+   :outertype: Color
+
+NavajoWhite
+^^^^^^^^^^^
+
+.. java:field:: public static final Color NavajoWhite
+   :outertype: Color
+
+Navy
+^^^^
+
+.. java:field:: public static final Color Navy
+   :outertype: Color
+
+OldLace
+^^^^^^^
+
+.. java:field:: public static final Color OldLace
+   :outertype: Color
+
+Olive
+^^^^^
+
+.. java:field:: public static final Color Olive
+   :outertype: Color
+
+OliveDrab
+^^^^^^^^^
+
+.. java:field:: public static final Color OliveDrab
+   :outertype: Color
+
+Orange
+^^^^^^
+
+.. java:field:: public static final Color Orange
+   :outertype: Color
+
+OrangeRed
+^^^^^^^^^
+
+.. java:field:: public static final Color OrangeRed
+   :outertype: Color
+
+Orchid
+^^^^^^
+
+.. java:field:: public static final Color Orchid
+   :outertype: Color
+
+PaleGoldenRod
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color PaleGoldenRod
+   :outertype: Color
+
+PaleGreen
+^^^^^^^^^
+
+.. java:field:: public static final Color PaleGreen
+   :outertype: Color
+
+PaleTurquoise
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color PaleTurquoise
+   :outertype: Color
+
+PaleVioletRed
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color PaleVioletRed
+   :outertype: Color
+
+PapayaWhip
+^^^^^^^^^^
+
+.. java:field:: public static final Color PapayaWhip
+   :outertype: Color
+
+PeachPuff
+^^^^^^^^^
+
+.. java:field:: public static final Color PeachPuff
+   :outertype: Color
+
+Peru
+^^^^
+
+.. java:field:: public static final Color Peru
+   :outertype: Color
+
+Pink
+^^^^
+
+.. java:field:: public static final Color Pink
+   :outertype: Color
+
+Plum
+^^^^
+
+.. java:field:: public static final Color Plum
+   :outertype: Color
+
+PowderBlue
+^^^^^^^^^^
+
+.. java:field:: public static final Color PowderBlue
+   :outertype: Color
+
+Purple
+^^^^^^
+
+.. java:field:: public static final Color Purple
+   :outertype: Color
+
+RebeccaPurple
+^^^^^^^^^^^^^
+
+.. java:field:: public static final Color RebeccaPurple
+   :outertype: Color
+
+RosyBrown
+^^^^^^^^^
+
+.. java:field:: public static final Color RosyBrown
+   :outertype: Color
+
+RoyalBlue
+^^^^^^^^^
+
+.. java:field:: public static final Color RoyalBlue
+   :outertype: Color
+
+SaddleBrown
+^^^^^^^^^^^
+
+.. java:field:: public static final Color SaddleBrown
+   :outertype: Color
+
+Salmon
+^^^^^^
+
+.. java:field:: public static final Color Salmon
+   :outertype: Color
+
+SandyBrown
+^^^^^^^^^^
+
+.. java:field:: public static final Color SandyBrown
+   :outertype: Color
+
+SeaGreen
+^^^^^^^^
+
+.. java:field:: public static final Color SeaGreen
+   :outertype: Color
+
+SeaShell
+^^^^^^^^
+
+.. java:field:: public static final Color SeaShell
+   :outertype: Color
+
+Sienna
+^^^^^^
+
+.. java:field:: public static final Color Sienna
+   :outertype: Color
+
+Silver
+^^^^^^
+
+.. java:field:: public static final Color Silver
+   :outertype: Color
+
+SkyBlue
+^^^^^^^
+
+.. java:field:: public static final Color SkyBlue
+   :outertype: Color
+
+SlateBlue
+^^^^^^^^^
+
+.. java:field:: public static final Color SlateBlue
+   :outertype: Color
+
+SlateGray
+^^^^^^^^^
+
+.. java:field:: public static final Color SlateGray
+   :outertype: Color
+
+SlateGrey
+^^^^^^^^^
+
+.. java:field:: public static final Color SlateGrey
+   :outertype: Color
+
+Snow
+^^^^
+
+.. java:field:: public static final Color Snow
+   :outertype: Color
+
+SpringGreen
+^^^^^^^^^^^
+
+.. java:field:: public static final Color SpringGreen
+   :outertype: Color
+
+SteelBlue
+^^^^^^^^^
+
+.. java:field:: public static final Color SteelBlue
+   :outertype: Color
+
+Tan
+^^^
+
+.. java:field:: public static final Color Tan
+   :outertype: Color
+
+Teal
+^^^^
+
+.. java:field:: public static final Color Teal
+   :outertype: Color
+
+Thistle
+^^^^^^^
+
+.. java:field:: public static final Color Thistle
+   :outertype: Color
+
+Tomato
+^^^^^^
+
+.. java:field:: public static final Color Tomato
+   :outertype: Color
+
+Turquoise
+^^^^^^^^^
+
+.. java:field:: public static final Color Turquoise
+   :outertype: Color
+
+Violet
+^^^^^^
+
+.. java:field:: public static final Color Violet
+   :outertype: Color
+
+Wheat
+^^^^^
+
+.. java:field:: public static final Color Wheat
+   :outertype: Color
+
+WhiteSmoke
+^^^^^^^^^^
+
+.. java:field:: public static final Color WhiteSmoke
+   :outertype: Color
+
+YellowGreen
+^^^^^^^^^^^
+
+.. java:field:: public static final Color YellowGreen
+   :outertype: Color
+
+Constructors
+------------
+Color
+^^^^^
+
+.. java:constructor:: public Color(int r, int g, int b)
+   :outertype: Color
+
+Color
+^^^^^
+
+.. java:constructor:: public Color(int rgb)
+   :outertype: Color
+
+Color
+^^^^^
+
+.. java:constructor:: public Color(String s)
+   :outertype: Color
+
+Methods
+-------
+toString
+^^^^^^^^
+
+.. java:method:: public String toString()
+   :outertype: Color
+
