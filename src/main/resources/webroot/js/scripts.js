@@ -17,6 +17,7 @@ var sock = new WebSocket(wsUri);
             layout: 'bottom',
             type: 'alert'
         });
+        $(window).resize();
     };
     sock.onmessage = function (event) {
         message = JSON.parse(event.data);
@@ -106,17 +107,32 @@ var sock = new WebSocket(wsUri);
 //
 //    setInterval(check, 1000);
 //}
+$( window ).resize(function() {
+    const json = JSON.stringify( {
+        type: 'resize',
+        width: document.documentElement.clientWidth,
+        height: document.documentElement.clientHeight
+    });
+    sock.send(json);
+});
 
 
-    $( function() {
+$( function() {
         $("body").mousemove(function (e) {
             $('span.coords').empty().append("(" + e.pageX + ", " + e.pageY + ")");
         });
     });
 
+
+
 function refreshhandler() {
     $('input').on('input', function () {
-        sock.send("{\"type\":input, \"name\":" +$(this).context.name +", \"val\":\""+ $(this).val()+"\"}");
+        const json = JSON.stringify({
+            type: 'input',
+            name: $(this).context.name,
+            val: $(this).val()
+        });
+        sock.send(json);
     });
     $('.clickable').click(function() {
        sock.send("{\"type\":click, \"name\":" + $(this).context.name +"}");
@@ -137,6 +153,7 @@ function consolein(txt) {
         "<span class=\"console-symbol\">&lt;&nbsp;</span>" +
         "<input name=\"in\" class=\"in\" on></div>");
     refreshhandler();
+    $('input.in').trigger('input'); //clear the text
     $('input.in').focus();
 }
 

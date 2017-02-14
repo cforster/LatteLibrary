@@ -243,6 +243,26 @@ drawText
    :param color: the color of the text
    :return: the text element, which you can modify before you paint.
 
+getWidth
+^^^^^^^^
+
+.. java:method:: public int getWidth()
+:outertype: WebLatte
+
+      the width of the current window
+
+      :return: the width in pixels
+
+getHeight
+^^^^^^^^^
+
+.. java:method:: public int getHeight()
+:outertype: WebLatte
+
+      the height of the current window
+
+      :return: the heigh in pixels
+
 getLeapX
 ^^^^^^^^
 

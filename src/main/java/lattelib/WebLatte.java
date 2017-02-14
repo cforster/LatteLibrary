@@ -37,6 +37,7 @@ public class WebLatte  {
     protected CountDownLatch clickLatch;
     protected CountDownLatch inputLatch;
     protected CountDownLatch loginLatch;
+    protected CountDownLatch sizeLatch = new CountDownLatch(1);
     protected String clickValue;
 
 
@@ -59,6 +60,10 @@ public class WebLatte  {
             } else if (json.getString("type").equals("leap-position")) {
                 dataset.put("leap-x", json.getString("x"));
                 dataset.put("leap-y", json.getString("y"));
+            } else if (json.getString("type").equals("resize")) {
+                dataset.put("window-width", ""+json.getInt("width"));
+                dataset.put("window-height", ""+json.getInt("height"));
+                sizeLatch.countDown();
             } else {
                 dataset.put(json.getString("name"), json.getString("val"));
             }
@@ -100,6 +105,33 @@ public class WebLatte  {
         }
         return getValue("username");
     }
+
+    /**
+     * the width of the current window
+     * @return the width in pixels
+     */
+    public int getWidth() {
+        try {
+            sizeLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return (int)Integer.parseInt(getValue("window-width"));
+    }
+
+    /**
+     * the height of the current window
+     * @return the height in pixels
+     */
+    public int getHeight() {
+        try {
+            sizeLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return (int)Integer.parseInt(getValue("window-height"));
+    }
+
 
     /**
      * the x coordinate of a pointer on the leap controller
