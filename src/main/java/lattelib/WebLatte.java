@@ -34,7 +34,7 @@ public class WebLatte  {
 
 
     protected Map<String, String> dataset = new HashMap<String, String>();
-    protected CountDownLatch clickLatch;
+    protected CountDownLatch clickLatch = new CountDownLatch(1);
     protected CountDownLatch inputLatch;
     protected CountDownLatch loginLatch;
     protected CountDownLatch sizeLatch = new CountDownLatch(1);
@@ -54,7 +54,7 @@ public class WebLatte  {
                 clickValue=json.getString("name");
                 clickLatch.countDown();
             } else if (json.getString("type").equals("in-enter")) {
-                inputLatch.countDown();
+                    inputLatch.countDown();
             } else if (json.getString("type").equals("login-success")) {
                 loginLatch.countDown();
             } else if (json.getString("type").equals("leap-position")) {
@@ -80,8 +80,8 @@ public class WebLatte  {
             e.printStackTrace();
         }
 
-        clearPaint();
-    }
+            clearPaint();
+        }
 
     public void setTitle(String title) {
         sparkServer.sendMessage("titl", title);
