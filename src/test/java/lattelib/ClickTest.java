@@ -9,12 +9,18 @@ public class ClickTest {
     public static void main(String[] args) {
         WebLatte frame = new WebLatte();
 
-        Element e = frame.drawCircle(100,100,75, ColorLatte.AliceBlue);
-        e.setAttribute("class", "clickable");
-        frame.addButton("charlie", 10, 20);
-        frame.paint();
+        int i = 0;
 
+//        while(true) {
+            Element e = frame.drawCircle(100, 100+i, 75, ColorLatte.AliceBlue);
+            WebLatte.makeClickable(e, "mycircle");
+            Element e2 = frame.drawRectangle(200,200,75, 75, 0, ColorLatte.Gold);
+            frame.paint();
+//            i++;
+
+//        }
         while(true) {
+            frame.nextLine();
             frame.println(frame.nextClick());
         }
     }

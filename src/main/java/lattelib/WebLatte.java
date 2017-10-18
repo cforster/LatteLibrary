@@ -87,8 +87,9 @@ public class WebLatte  {
         sparkServer.sendMessage("titl", title);
     }
 
-    public static void makeClickable(Element e) {
+    public static void makeClickable(Element e, String name) {
         e.setAttribute("class", "clickable");
+        e.setAttribute("name", name);
     }
 
     /**

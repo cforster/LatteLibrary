@@ -26,9 +26,10 @@ var sock = new WebSocket(wsUri);
             //the svg gets updated using reactjs:
             var root = React.createElement("div", {
                 className: "content",
-                dangerouslySetInnerHTML: {__html: message.payload}
+                dangerouslySetInnerHTML: {__html: message.payload},
             });
             ReactDOM.render(root, document.getElementById('user-svg'));
+            refreshhandler(); //for click handlers
             //consider adding keys if people get massive slowdown
         }
         else if (message.type == "cout") {
@@ -116,12 +117,12 @@ $( window ).resize(function() {
     sock.send(json);
 });
 
-
 $( function() {
         $("body").mousemove(function (e) {
             $('span.coords').empty().append("(" + e.pageX + ", " + e.pageY + ")");
         });
     });
+
 
 
 
@@ -135,7 +136,7 @@ function refreshhandler() {
         sock.send(json);
     });
     $('.clickable').click(function() {
-       sock.send("{\"type\":click, \"name\":" + $(this).context.name +"}");
+       sock.send("{\"type\":click, \"name\":" + $(this).attr('name') +"}");
     });
     $('input.in').keypress(function(e) {
         if(e.which == 13) {

@@ -11,6 +11,10 @@
             margin: 0px;
             padding: 0px;
             position:absolute;
+            pointer-events: none;
+        }
+        .clickable {
+            pointer-events: all;
         }
         svg {
             z-index: -1;
@@ -34,6 +38,7 @@
             vertical-align: top;
             padding: 0 0 100px 0;
             background: transparent;
+            pointer-events: all;
         }
         input.in:focus {
             outline:none;
